@@ -1,0 +1,194 @@
+<app-header></app-header>
+<!--presentation-->
+<section>
+  <span class="image main">
+    <video width="100%" controls autoplay lopp [muted]="'muted'">
+      <source src="assets/videos/WMS_Warehouse-Management-System.mp4" /></video
+  ></span>
+  <p>
+    Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam
+    facilisis ante interdum congue. Integer mollis, nisl amet convallis,
+    porttitor magna ullamcorper, amet egestas mauris.
+  </p>
+  <hr class="major" />
+
+  <h2>Quienes somos</h2>
+  <p>
+    Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in
+    faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis.
+    Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque
+    leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu
+    massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac,
+    pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at,
+    elementum convallis elit. Pellentesque enim turpis, hendrerit.
+  </p>
+</section>
+<!-- Section -->
+<section>
+  <header class="major">
+    <h2>Beneficios</h2>
+  </header>
+  <div class="features">
+    <article>
+      <span class="icon fa-gem"></span>
+      <div class="content">
+        <h3>Portitor ullamcorper</h3>
+        <p>
+          Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore.
+          Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat
+          tempus aliquam.
+        </p>
+      </div>
+    </article>
+    <article>
+      <span class="icon solid fa-paper-plane"></span>
+      <div class="content">
+        <h3>Sapien veroeros</h3>
+        <p>
+          Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore.
+          Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat
+          tempus aliquam.
+        </p>
+      </div>
+    </article>
+    <article>
+      <span class="icon solid fa-rocket"></span>
+      <div class="content">
+        <h3>Quam lorem ipsum</h3>
+        <p>
+          Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore.
+          Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat
+          tempus aliquam.
+        </p>
+      </div>
+    </article>
+    <article>
+      <span class="icon solid fa-signal"></span>
+      <div class="content">
+        <h3>Sed magna finibus</h3>
+        <p>
+          Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore.
+          Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat
+          tempus aliquam.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+<!-- Section -->
+<section>
+  <header class="major">
+    <h2>Causa social</h2>
+  </header>
+  <p>
+    Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in
+    faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis.
+    Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque
+    leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu
+    massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac,
+    pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at,
+    elementum convallis elit. Pellentesque enim turpis, hendrerit.
+  </p>
+</section>
+<!-- Content -->
+<section>
+  <header class="major">
+    <h2>Nuevos insumos</h2>
+  </header>
+  <div class="posts">
+    <article *ngFor="let item of (state$ | async).newProducts">
+      <a href="#" class="image" *ngIf="item.images.length > 0"
+        ><img src="{{ item.images[0].url }}" alt=""
+      /></a>
+      <h3>{{ item.name }}</h3>
+      <p>
+        {{ item.description }}
+      </p>
+      <ul class="actions">
+        <li><a (click)="viewDetailsProduct(item)" class="button">Ver</a></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- Banner -->
+<section>
+  <div class="content">
+    <header class="major">
+      <h2>No encontraste lo que buscabas</h2>
+    </header>
+    <p>
+      Nos preocupa tu salud, estamos en constante actualizacion y en breve
+      tendremos en nuestro catalogo todo lo que necesitas para cuidar tu salud
+    </p>
+  </div>
+  <span class="image object">
+    <!-- Form -->
+    <h3>Solicita un producto</h3>
+    <app-request-form
+      #requestForm
+      (submitForm)="submitRequestForm($event)"
+    ></app-request-form>
+  </span>
+</section>
+<!-- Section -->
+<section>
+  <div class="content">
+    <header class="major">
+      <h2>Testimonios</h2>
+    </header>
+    <blockquote>
+      Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum.
+      Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu
+      faucibus. Integer ac pellentesque praesent. Lorem ipsum dolor. Lorem ipsum
+      dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+      adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus.
+    </blockquote>
+  </div>
+</section>
+<!-- Section -->
+<section>
+  <div class="content">
+    <header class="major">
+      <h2>¿Tienes dudas?</h2>
+    </header>
+    <p>
+      Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio
+      porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat
+      aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes
+      viverra nibh in adipiscing blandit.
+    </p>
+    <div class="col-6 offset-3" style="margin-bottom: 20px">
+      <a routerLink="/home/qa" class="button primary fit">Preguntas comunes</a>
+    </div>
+  </div>
+</section>
+<!-- Footer -->
+<footer id="footer" style="border-top: solid 2px rgba(210, 215, 217, 0.75)">
+  <!-- Section -->
+  <section style="border-top: none">
+    <div class="row">
+      <div class="col-6">
+        <h2>Contacto</h2>
+        <p>
+          Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit
+          lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam
+          facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.
+        </p>
+      </div>
+      <div class="col-6">
+        <ul class="contact">
+          <li class="icon solid fa-envelope">
+            <a href="#">information@untitled.tld</a>
+          </li>
+          <li class="icon solid fa-phone">(000) 000-0000</li>
+          <li class="icon solid fa-home">
+            1234 Somewhere Road #8254<br />
+            Nashville, TN 00000-0000
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <p class="copyright">&copy; Untitled. All rights reserved. Cronico</p>
+</footer>

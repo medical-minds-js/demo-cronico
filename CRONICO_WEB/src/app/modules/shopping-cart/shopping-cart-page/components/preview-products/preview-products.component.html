@@ -1,0 +1,14 @@
+<section class="pt-1 pb-1 sep-bottom normal-padding mt-3 mb-3">
+  <div class="row" *ngFor="let item of products">
+    <div class="col-8">
+      <p class="mb-0">
+        Medicamento: {{ item.product.name }} Cajas:
+        {{ item.pieces }}
+      </p>
+      <p class="mb-0">Periodo: {{ item.period }} días.</p>
+    </div>
+    <div class="col-4">
+      <h3 class="text-end mb-1">$ {{ item.pieces * item.product.price }}</h3>
+    </div>
+  </div>
+</section>

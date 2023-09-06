@@ -1,0 +1,303 @@
+<!-- Header -->
+<app-header [title]="'Carrito de compras'"></app-header>
+<!--Content-->
+<div
+  class="mt-4"
+  [hidden]="tab != 1"
+  *ngIf="(state$ | async).shoppingCart.length > 0"
+>
+  <div class="row" *ngIf="!(state$ | async).separateShoppingCart">
+    <div class="col-12">
+      <h2>Lista de productos</h2>
+    </div>
+    <div class="box">
+      <app-shopping-cart-products
+        [items]="(state$ | async).shoppingCart"
+        (showEditItemShoppingCart)="showEditItemShoppingCart($event)"
+        (closeEditItemShoppingCart)="closeEditItemShoppingCart($event)"
+        (deleteItemShoppingCart)="deleteItemShoppingCart($event)"
+        (addDoseItemShoppingCart)="addDose($event)"
+        (resDoseItemShoppingCart)="resDose($event)"
+        (addPiecesItemShoppingCart)="addPieces($event)"
+        (resPiecesItemShoppingCart)="resPieces($event)"
+      ></app-shopping-cart-products>
+    </div>
+  </div>
+  <div class="row" *ngIf="(state$ | async).separateShoppingCart">
+    <div class="col-12 mb-2 mt-3">
+      <h3 class="mb-0">Productos a 15 dias</h3>
+    </div>
+    <div class="box mb-0">
+      <app-shopping-cart-products
+        [items]="(state$ | async).shoppingCart15"
+        (showEditItemShoppingCart)="showEditItemShoppingCart($event)"
+        (closeEditItemShoppingCart)="closeEditItemShoppingCart($event)"
+        (deleteItemShoppingCart)="deleteItemShoppingCart($event)"
+        (addDoseItemShoppingCart)="addDose($event)"
+        (resDoseItemShoppingCart)="resDose($event)"
+        (addPiecesItemShoppingCart)="addPieces($event)"
+        (resPiecesItemShoppingCart)="resPieces($event)"
+      ></app-shopping-cart-products>
+    </div>
+    <div class="col-8 mb-2 mt-3">
+      <h3 class="mb-0">Productos a 30 dias</h3>
+    </div>
+    <div class="box">
+      <app-shopping-cart-products
+        [items]="(state$ | async).shoppingCart30"
+        (showEditItemShoppingCart)="showEditItemShoppingCart($event)"
+        (closeEditItemShoppingCart)="closeEditItemShoppingCart($event)"
+        (deleteItemShoppingCart)="deleteItemShoppingCart($event)"
+        (addDoseItemShoppingCart)="addDose($event)"
+        (resDoseItemShoppingCart)="resDose($event)"
+        (addPiecesItemShoppingCart)="addPieces($event)"
+        (resPiecesItemShoppingCart)="resPieces($event)"
+      ></app-shopping-cart-products>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <button
+        type="button"
+        class="button fit solid icon fa-check mt-3"
+        (click)="changeTab(2)"
+      >
+        Continuar
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 fa-progress">
+      <i class="fa fa-circle"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="far fa-circle"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="far fa-circle"> </i>
+    </div>
+  </div>
+</div>
+<div
+  class="mt-4"
+  [hidden]="tab != 1"
+  *ngIf="(state$ | async).shoppingCart.length == 0"
+>
+  <div class="row">
+    <div class="col-6 text-center offset-3">
+      <h3 class="mb-2">Explora los productos y solicita lo que necesitas</h3>
+      <p>
+        <a class="link" routerLink="/search">Ver productos</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!--  Pestana 2 Direccion de entrega -->
+<div class="mt-4" [hidden]="tab != 2">
+  <div class="row">
+    <div class="col-10">
+      <h2 id="content">Elige donde recibir</h2>
+    </div>
+    <div class="col-2 text-end">
+      <button
+        class="link"
+        *ngIf="!(state$ | async).showAddressAddForm"
+        (click)="showFormCreateAddress()"
+      >
+        Agregar dirección
+      </button>
+      <button
+        class="link"
+        *ngIf="(state$ | async).showAddressAddForm"
+        (click)="closeFormAddAddress()"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="(state$ | async).showAddressAddForm">
+    <app-address-edit-form
+      [address]="(state$ | async).editableAddress"
+      [postalCodes]="(state$ | async).postalCodes"
+      (submitPostalCode)="getPostalCode($event)"
+      (submitForm)="createAddress($event)"
+      (closeForm)="closeFormAddAddress()"
+    >
+    </app-address-edit-form>
+  </div>
+  <div *ngIf="(state$ | async).address.length > 0">
+    <div class="box mb-0" *ngFor="let address of (state$ | async).address">
+      <div class="row">
+        <app-address-edit-form
+          *ngIf="
+            address.status === 1 &&
+            (state$ | async).showAddressEditForm === true
+          "
+          [address]="address"
+          [postalCodes]="(state$ | async).postalCodes"
+          (submitPostalCode)="getPostalCode($event)"
+          (submitForm)="editAddress($event)"
+          (closeForm)="closeAddressEditForm()"
+        >
+        </app-address-edit-form>
+        <app-address-detail-full
+          *ngIf="
+            address.status === 1 &&
+            (state$ | async).showAddressEditForm === false
+          "
+          [address]="address"
+          [showDeliveryForm]="(state$ | async).showDeliveryForm"
+          [deliveriesTimes]="(state$ | async).deliveriesTimes"
+          (requestShowEditForm)="showAddressEditForm($event)"
+          (addressSelected)="predeterminateAddress($event)"
+          (requestShowDeliveryForm)="showEditDeliveryForm($event)"
+          (submitDeliveryForm)="editDelivery($event)"
+          (closeDeliveryForm)="closeFormDelivery($event)"
+        ></app-address-detail-full>
+        <app-address-detail
+          *ngIf="address.status === 0"
+          [address]="address"
+          (addressSelected)="predeterminateAddress($event)"
+        ></app-address-detail>
+      </div>
+    </div>
+  </div>
+  <app-preview-products [products]="(state$ | async).shoppingCart">
+  </app-preview-products>
+  <div class="row">
+    <div class="col-4 offset-4">
+      <button
+        type="button"
+        class="button solid fit icon fa-check"
+        (click)="changeTab(3)"
+      >
+        Continuar
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 fa-progress">
+      <i class="fa fa-circle" (click)="changeTab(1)"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-circle"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="far fa-circle"> </i>
+    </div>
+  </div>
+</div>
+<!--  Pestana 3 Forma de pago -->
+<div class="mt-4" [hidden]="tab != 3">
+  <ng-container *ngIf="!(state$ | async).shoppingAddCard">
+    <div class="row">
+      <div class="col-8">
+        <h2 id="content">Forma de pago</h2>
+      </div>
+      <div class="col-4 text-end">
+        <button class="link" (click)="shoppingAddCard()">
+          Agregar nueva tarjeta
+        </button>
+      </div>
+    </div>
+    <div class="box mb-0" *ngFor="let item of (state$ | async).cards">
+      <app-credit-card-detail-full
+        *ngIf="item.active"
+        [creditCard]="item"
+        (changeActiveCard)="changeActiveCard($event)"
+      ></app-credit-card-detail-full>
+      <app-credit-card-detail
+        *ngIf="!item.active"
+        [creditCard]="item"
+        (changeActiveCard)="changeActiveCard($event)"
+      ></app-credit-card-detail>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(state$ | async).shoppingAddCard">
+    <div class="row">
+      <div class="col-8">
+        <h2 id="content">Forma de pago</h2>
+      </div>
+      <div class="col-4 text-end">
+        <button
+          class="link"
+          (click)="shoppingCloseAddCard()"
+          *ngIf="(state$ | async).cards.length > 0"
+        >
+          Usar tarjeta guardada
+        </button>
+      </div>
+    </div>
+    <div class="box">
+      <app-credit-card-form
+        (submitForm)="createCard($event)"
+        (closeForm)="shoppingCloseAddCard()"
+      ></app-credit-card-form>
+    </div>
+  </ng-container>
+  <app-preview-products class="mb-3" [products]="(state$ | async).shoppingCart">
+  </app-preview-products>
+
+  <div class="row mb-3">
+    <div class="col-12">
+      <input
+        type="checkbox"
+        class=""
+        name="repeticion"
+        id="repeticion"
+        checked
+      />
+      <label for="repeticion"
+        >Aceptas realizar la solicitud automatica al finalizar cada
+        periodo</label
+      >
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4 offset-4">
+      <button
+        type="button"
+        class="button solid primary fit icon fa-check"
+        (click)="onConfirm($event)"
+      >
+        Comprar
+      </button>
+    </div>
+    <form id="previousConfirm" name="previousConfirm"></form>
+  </div>
+  <div class="row">
+    <div class="col-12 fa-progress">
+      <i class="fa fa-circle" (click)="changeTab(1)"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-circle" (click)="changeTab(2)"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-minus"> </i>
+      <i class="fa fa-circle"> </i>
+    </div>
+  </div>
+</div>

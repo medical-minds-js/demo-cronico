@@ -1,0 +1,148 @@
+<form
+  action="#"
+  method="POST"
+  id="payment-form"
+  [formGroup]="form"
+  novalidate
+  autocomplete="off"
+  (ngSubmit)="onSubmit($event)"
+>
+  <input
+    type="hidden"
+    name="use_card_points"
+    id="use_card_points"
+    value="false"
+  />
+  <div class="">
+    <h3>Tarjeta de crédito o débito</h3>
+    <div class="row">
+      <div class="col-12">
+        <label>Nombre del titular</label
+        ><input
+          type="text"
+          placeholder="Como aparece en la tarjeta"
+          autocomplete="off"
+          data-openpay-card="holder_name"
+          maxlength="80"
+          name="inputHolder"
+          id="inputHolder"
+          formControlName="inputHolder"
+        />
+      </div>
+      <div class="col-12">
+        <label>Número de tarjeta</label
+        ><input
+          type="text"
+          autocomplete="off"
+          data-openpay-card="card_number"
+          maxlength="16"
+          name="inputNumber"
+          id="inputNumber"
+          formControlName="inputNumber"
+        />
+      </div>
+      <div class="col-6">
+        <label>Fecha de expiración</label>
+        <div class="row">
+          <div class="col-3 pr-0">
+            <input
+              type="text"
+              placeholder="MM"
+              data-openpay-card="expiration_month"
+              maxlength="2"
+              name="inputExpirationMonth"
+              id="inputExpirationMonth"
+              formControlName="inputExpirationMonth"
+              class="text-center"
+            />
+          </div>
+          <div class="col-3 pl-0 pr-0">
+            <input
+              type="text"
+              placeholder="YY"
+              data-openpay-card="expiration_year"
+              maxlength="4"
+              name="inputExpirationYear"
+              id="inputExpirationYear"
+              formControlName="inputExpirationYear"
+              class="text-center"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <label>Código de seguridad</label>
+        <input
+          type="text"
+          placeholder="CVV"
+          autocomplete="off"
+          data-openpay-card="cvv2"
+          maxlength="3"
+          name="inputCvv"
+          id="inputCvv"
+          formControlName="inputCvv"
+        />
+
+        <!-- <p>Street:</p>
+          <input
+            data-openpay-card-address="line1"
+            size="20"
+            type="text"
+            value="Independencioa"
+          />
+          <p>Number:</p>
+          <input
+            data-openpay-card-address="line2"
+            size="20"
+            type="text"
+            value="104"
+          />
+          <p>References:</p>
+          <input
+            data-openpay-card-address="line3"
+            size="20"
+            type="text"
+            value="Centro"
+          />
+          <p>Postal code:</p>
+          <input
+            data-openpay-card-address="postal_code"
+            size="6"
+            type="text"
+            value="52300"
+          />
+          <p>City:</p>
+          <input
+            data-openpay-card-address="city"
+            size="20"
+            type="text"
+            value="Toluca"
+          />
+          <p>State:</p>
+          <input
+            data-openpay-card-address="state"
+            size="20"
+            type="text"
+            value="Mexico"
+          />
+          <p>Country code:</p>
+          <input
+            data-openpay-card-address="country_code"
+            size="3"
+            type="text"
+            value="MXM"
+          /> -->
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-6">
+        <a class="button icon solid" type="button" (click)="onClose()"
+          >Cancelar</a
+        >
+      </div>
+      <div class="col-6 text-end">
+        <button class="button primary solid" type="submit">Guardar</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,105 @@
+<!-- Header -->
+<app-header [title]="'Pedidos'"></app-header>
+<!--Banner-->
+<section
+  class="normal-padding"
+  *ngFor="let item of (state$ | async).subscriptions"
+>
+  <div class="box mb-0">
+    <div class="row gtr-200">
+      <div class="col-12">
+        <h3>{{ item.name }} {{ item.createdAt | date : "dd/MM/yyyy" }}</h3>
+      </div>
+      <div class="col-6">
+        <div class="row gtr-200">
+          <ul class="alt items">
+            <li>
+              <p>
+                <span> Estado</span>
+                <span
+                  ><b>
+                    {{ item.subscriptionStatus.name }}
+                    <i
+                      class="fas fa-credit-card"
+                      *ngIf="item.subscriptionStatus.id == 1"
+                    ></i>
+                    <i
+                      class="fas fa-times"
+                      *ngIf="item.subscriptionStatus.id == 2"
+                    ></i>
+                    <i
+                      class="fas fa-boxes"
+                      *ngIf="item.subscriptionStatus.id == 3"
+                    ></i>
+                    <i
+                      class="fas fa-check"
+                      *ngIf="item.subscriptionStatus.id == 4"
+                    ></i>
+                    <i
+                      class="fas fa-times"
+                      *ngIf="item.subscriptionStatus.id == 5"
+                    ></i></b
+                ></span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span> Periodo</span>
+                <span>
+                  <b> {{ item.period }} dias</b>
+                </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span> Costo total</span>
+                <span>
+                  <b>{{ item.total }} </b>
+                </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span> Productos</span>
+                <span>
+                  <b>{{ item.items.length }}</b>
+                </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span> Dirección</span>
+              </p>
+              <p>
+                <span>
+                  <b>{{ item.orders[0].location }}</b>
+                  <br />
+                  <b>{{ item.orders[0].reference }}</b>
+                </span>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6">
+        <a class="image block"
+          ><img
+            *ngIf="item.items.length > 0"
+            src="{{ item.items[0].product.images[0] }}"
+            width="100%"
+            alt=""
+        /></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mt-3">
+        <button
+          routerLink="/orders/detail/{{ item.id }}"
+          class="button primary fit"
+        >
+          Ver detalles
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

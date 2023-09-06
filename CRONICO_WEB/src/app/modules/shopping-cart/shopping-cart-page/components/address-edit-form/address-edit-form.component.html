@@ -1,0 +1,268 @@
+<div class="box">
+  <form
+    [formGroup]="form"
+    novalidate
+    autocomplete="off"
+    (ngSubmit)="editAddress()"
+  >
+    <div class="row">
+      <div class="col-6">
+        <h5><label for="inputName">Nombre</label></h5>
+        <input
+          type="text"
+          name="inputName"
+          id="inputName"
+          formControlName="inputName"
+          placeholder="Ingrese nombre"
+        />
+        <ng-container *ngIf="form.controls.inputName.errors && submited">
+          <p *ngIf="form.controls.inputName.errors.required" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputName.errors.maxLength" class="error">
+            No puede ingresar mas de 255 caracteres
+          </p>
+        </ng-container>
+      </div>
+      <div class="col-6">
+        <h5><label for="inputStreet">Calle</label></h5>
+        <input
+          type="text"
+          name="inputStreet"
+          id="inputStreet"
+          formControlName="inputStreet"
+          placeholder="Ingrese calle"
+        />
+        <ng-container *ngIf="form.controls.inputStreet.errors && submited">
+          <p *ngIf="form.controls.inputStreet.errors.required" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputStreet.errors.maxLength" class="error">
+            No puede ingresar mas de 255 caracteres
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <h5><label for="inputStreetNumber">Número exterior</label></h5>
+        <input
+          type="number"
+          name="inputStreetNumber"
+          id="inputStreetNumber"
+          formControlName="inputStreetNumber"
+          placeholder="Ingrese número"
+        />
+        <ng-container
+          *ngIf="form.controls.inputStreetNumber.errors && submited"
+        >
+          <p
+            *ngIf="form.controls.inputStreetNumber.errors.required"
+            class="error"
+          >
+            El campo es obligatorio
+          </p>
+          <p
+            *ngIf="form.controls.inputStreetNumber.errors.maxLength"
+            class="error"
+          >
+            No puede ingresar mas de 11 caracteres
+          </p>
+        </ng-container>
+      </div>
+      <div class="col-3">
+        <h5><label for="inputInteriorNumber">Número interior</label></h5>
+        <input
+          type="number"
+          name="inputInteriorNumber"
+          id="inputInteriorNumber"
+          formControlName="inputInteriorNumber"
+          placeholder="Ingrese número"
+        />
+        <ng-container
+          *ngIf="form.controls.inputInteriorNumber.errors && submited"
+        >
+          <p
+            *ngIf="form.controls.inputInteriorNumber.errors.required"
+            class="error"
+          >
+            El campo es obligatorio
+          </p>
+          <p
+            *ngIf="form.controls.inputInteriorNumber.errors.maxLength"
+            class="error"
+          >
+            No puede ingresar mas de 11 caracteres
+          </p>
+        </ng-container>
+      </div>
+      <div class="col-3">
+        <h5><label for="inputCp">Código postal</label></h5>
+        <input
+          type="text"
+          name="inputCp"
+          id="inputCp"
+          formControlName="inputCp"
+          placeholder="Ingrese código postal"
+          list="datalistOptions"
+          (input)="applyFilterPostalCodes($event)"
+        />
+        <ng-container *ngIf="form.controls.inputCp.errors && submited">
+          <p *ngIf="form.controls.inputCp.errors.required" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputCp.errors.min" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputCp.errors.maxLength" class="error">
+            No puede ingresar mas de 11 caracteres
+          </p>
+        </ng-container>
+        <ng-container *ngIf="form.controls.inputCp.errors">
+          <p *ngIf="form.controls.inputCp.errors.found" class="error">
+            Código postal no coincide, valide su número
+          </p>
+        </ng-container>
+      </div>
+      <div class="col-3">
+        <h5><label for="inputSuburb">Colonia</label></h5>
+        <input
+          *ngIf="postalCodes.length == 0"
+          type="text"
+          name="inputSuburb"
+          id="inputSuburb"
+          formControlName="inputSuburb"
+          placeholder="Seleccione código postal"
+          readonly
+        />
+        <select
+          *ngIf="postalCodes.length > 0"
+          class="form-select"
+          name="inputSuburb"
+          id="inputSuburb"
+          formControlName="inputSuburb"
+          placeholder="Seleccione código postal"
+        >
+          <option
+            *ngFor="let item of postalCodes"
+            value="{{ item.settlement }}"
+          >
+            {{ item.settlement }}
+          </option>
+        </select>
+        <ng-container *ngIf="form.controls.inputSuburb.errors && submited">
+          <p *ngIf="form.controls.inputSuburb.errors.required" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputSuburb.errors.maxLength" class="error">
+            No puede ingresar mas de 255 caracteres
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <h5><label for="inputLocation">Localidad</label></h5>
+        <input
+          type="text"
+          name="inputLocation"
+          id="inputLocation"
+          formControlName="inputLocation"
+          placeholder="Seleccione código postal"
+          readonly
+        />
+        <ng-container *ngIf="form.controls.inputLocation.errors && submited">
+          <p *ngIf="form.controls.inputLocation.errors.required" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputLocation.errors.maxLength" class="error">
+            No puede ingresar mas de 255 caracteres
+          </p>
+        </ng-container>
+      </div>
+      <div class="col-6">
+        <h5><label for="inputState">Estado</label></h5>
+        <input
+          type="text"
+          name="inputState"
+          id="inputState"
+          formControlName="inputState"
+          placeholder="Seleccione código postal"
+          readonly
+        />
+        <ng-container *ngIf="form.controls.inputState.errors && submited">
+          <p *ngIf="form.controls.inputState.errors.required" class="error">
+            El campo es obligatorio
+          </p>
+          <p *ngIf="form.controls.inputState.errors.maxLength" class="error">
+            No puede ingresar mas de 255 caracteres
+          </p>
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-6 col-12">
+      <h5><label for="inputComments">Comentarios</label></h5>
+      <textarea
+        name="inputComments"
+        id="inputComments"
+        placeholder="Ingrese sus comentarios"
+        formControlName="inputComments"
+        rows="6"
+      ></textarea>
+      <ng-container *ngIf="form.controls.inputComments.errors && submited">
+        <p *ngIf="form.controls.inputComments.errors.maxLength" class="error">
+          No puede ingresar mas de 255 caracteres
+        </p>
+      </ng-container>
+    </div>
+    <div class="col-6 col-12">
+      <h5><label for="inputReference">Referencia</label></h5>
+      <textarea
+        name="inputReference"
+        id="inputReference"
+        formControlName="inputReference"
+        placeholder="Ingrese su referencia"
+        rows="6"
+      ></textarea>
+      <ng-container *ngIf="form.controls.inputReference.errors && submited">
+        <p *ngIf="form.controls.inputReference.errors.maxLength" class="error">
+          No puede ingresar mas de 255 caracteres
+        </p>
+      </ng-container>
+    </div>
+    <div class="col-6 col-12-small" *ngIf="checked">
+      <input
+        type="checkbox"
+        id="inputStatus"
+        name="inputStatus"
+        formControlName="inputStatus"
+        checked
+      />
+      <label for="inputStatus">Usar como predeterminada</label>
+    </div>
+    <div class="col-6 col-12-small" *ngIf="!checked">
+      <input
+        type="checkbox"
+        id="inputStatus"
+        name="inputStatus"
+        formControlName="inputStatus"
+      />
+      <label for="inputStatus">Usar como predeterminada</label>
+    </div>
+    <div class="row mt-3">
+      <div class="col-6 text-start">
+        <a class="button icon solid" type="button" (click)="close()"
+          >Cancelar</a
+        >
+      </div>
+      <div class="col-6 text-end">
+        <button class="button primary solid" type="submit">
+          {{ address.id ? "Terminar" : "Guardar" }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<!--
+inputStatus
+-->

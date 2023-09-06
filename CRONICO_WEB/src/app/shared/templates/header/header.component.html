@@ -1,0 +1,13 @@
+<!-- Header -->
+<header id="header">
+  <a class="toggle {{ icon }}" (click)="onClickButton()">Toggle</a>
+  <h1>
+    {{ title }}
+    <img
+      src="/assets/images/logo_header.jpg"
+      alt="logo"
+      class="logo"
+      *ngIf="!title"
+    />
+  </h1>
+</header>

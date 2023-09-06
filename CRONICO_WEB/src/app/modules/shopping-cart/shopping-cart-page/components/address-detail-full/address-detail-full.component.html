@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-10">
+    <input
+      type="radio"
+      id="demo-priority-low_{{ address.id }}"
+      name="demo-priority"
+      [checked]="address.status == 1"
+      (change)="predeterminateAddress(address)"
+    />
+    <label for="demo-priority-low_{{ address.id }}">
+      <h4 class="mb-1">{{ address.name }}</h4>
+    </label>
+  </div>
+  <div class="col-2 text-end">
+    <button class="link" (click)="showEditAddress(address)">Editar</button>
+    <button
+      class="link"
+      (click)="onDeleteAddress(address)"
+      *ngIf="showDeleteButton"
+    >
+      Eliminar
+    </button>
+  </div>
+  <div class="col-12">
+    <h4 class="mb-0">
+      Calle {{ address.street }} {{ address.streetNumber }},
+      {{ address.suburb }} #{{ address.cp }}- {{ address.location }},
+      {{ address.state }} |<br />
+    </h4>
+  </div>
+  <div class="col-12">
+    <p class="mb-1">Referenica del domicilio</p>
+    <h4 class="mb-0">{{ address.reference }}</h4>
+  </div>
+  <div class="col-12">
+    <p class="mb-1">Observación adicional</p>
+    <h4 class="mb-0">{{ address.comments }}</h4>
+  </div>
+
+  <div class="col-2 mt-3">
+    <h4 class="mb-1">Horarios de entrega</h4>
+  </div>
+  <div class="col-4 mt-3" *ngIf="!showDeliveryForm">
+    <button class="link" (click)="onShowDeliveryForm(address)">
+      Editar horario
+    </button>
+  </div>
+  <div class="col-12" *ngIf="!showDeliveryForm">
+    <p class="mb-1" *ngFor="let delivery of address.deliveryTimes">
+      Horario de {{ delivery.startTime }} -
+      {{ delivery.endTime }}
+    </p>
+  </div>
+  <div class="col-12">
+    <app-delivery-times-form
+      *ngIf="showDeliveryForm"
+      [deliveries]="address.deliveryTimes"
+      [deliveryTimes]="deliveriesTimes"
+      (submitForm)="onSubmitFormDelivery($event)"
+      (closeForm)="onCloseFormDelivery()"
+    >
+    </app-delivery-times-form>
+  </div>
+</div>

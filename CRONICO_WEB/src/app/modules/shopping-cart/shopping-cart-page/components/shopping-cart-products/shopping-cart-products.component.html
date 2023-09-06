@@ -1,0 +1,94 @@
+<div class="row" *ngFor="let item of items">
+  <ng-container *ngIf="!item.editing">
+    <div class="col-7">
+      <h3 class="mb-2">
+        {{ item.product.name }}
+      </h3>
+      <p class="mb-1">Presentación: {{ item.product.presentation }}</p>
+      <p class="mb-0">
+        <span *ngIf="item.product.sales.length > 0">
+          {{ item.product.sales[0].percent + "%" }}
+        </span>
+        <button class="link" (click)="onShowForm(item)">Editar</button>
+        <button class="link" (click)="onDeleteShoppingCart(item)">
+          Eliminar
+        </button>
+      </p>
+    </div>
+    <div class="col-2 text-center pl-0 pr-0">
+      <h4>{{ item.pieces }} caja(s)</h4>
+    </div>
+    <div class="col-3 text-end">
+      <h3>$ {{ item.total }}</h3>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="item.editing">
+    <div class="col-4">
+      <h4 class="mb-2">{{ item.product.name }}</h4>
+      <p>
+        <button class="link" (click)="onCloseEdit()">Terminar</button>
+      </p>
+    </div>
+    <div class="col-3 text-center">
+      <div class="col-12 text-center"><h5>Dosis diaria</h5></div>
+      <button
+        type="button"
+        class="button solid icon circle-icon fa-minus-circle"
+        (click)="onResDose(item)"
+      ></button>
+      <form novalidate autocomplete="off" class="inline-shopping">
+        <input
+          type="text"
+          id="inputWeeks_{{ item.id }}"
+          name="inputWeeks_{{ item.id }}"
+          value="{{ item.dose }}"
+          readonly
+        />
+      </form>
+      <button
+        type="button"
+        class="button solid icon circle-icon fa-plus-circle"
+        (click)="onAddDose(item)"
+      ></button>
+    </div>
+    <div class="col-3 text-center">
+      <div class="col-12 text-center"><h5>Abastecimiento</h5></div>
+      <button
+        type="button"
+        class="button solid icon circle-icon fa-minus-circle"
+        (click)="onResPieces(item)"
+      ></button>
+      <form novalidate autocomplete="off" class="inline-shopping">
+        <input
+          type="text"
+          id="inputSupplying_{{ item.id }}"
+          name="inputSupplying_{{ item.id }}"
+          value="{{ item.pieces }}"
+          readonly
+        />
+      </form>
+      <button
+        type="button"
+        class="button solid icon circle-icon fa-plus-circle"
+        (click)="onAddPieces(item)"
+      ></button>
+      <div
+        class="col-12 text-center"
+        *ngIf="item.suggestedPieces > item.pieces"
+      >
+        <p>Cajas recomendadas. {{ item.suggestedPieces }}</p>
+      </div>
+      <div
+        class="col-12 text-center"
+        *ngIf="item.suggestedPieces < item.pieces"
+      >
+        <p>
+          Se recomiendan {{ item.suggestedPieces }} para el periodo de tiempo
+        </p>
+      </div>
+    </div>
+    <div class="col-2">
+      <h4 class="mb-0 text-end">${{ item.total }}</h4>
+    </div>
+  </ng-container>
+</div>

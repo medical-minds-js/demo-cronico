@@ -1,0 +1,201 @@
+<app-header [title]="'Mi cuenta'"></app-header>
+<section class="normal-padding">
+  <div class="row" *ngIf="!(state$ | async).showEditUserForm">
+    <div class="col-12">
+      <button class="link" (click)="showEditUserForm()">Editar</button>
+    </div>
+  </div>
+  <div class="row" *ngIf="(state$ | async).showEditUserForm">
+    <app-user-data-form
+      [userData]="(state$ | async).currentUser"
+      (submitForm)="editUser($event)"
+      (closeForm)="closeEditUSerForm()"
+    >
+    </app-user-data-form>
+  </div>
+  <div class="row" *ngIf="!(state$ | async).showEditUserForm">
+    <div class="col-12">
+      <p class="mb-1">Nombre</p>
+      <h4 class="mb-0">{{ (state$ | async).currentUser.name }}</h4>
+    </div>
+    <div class="col-12">
+      <p class="mb-1">Apellidos</p>
+      <h4 class="mb-0">
+        {{ (state$ | async).currentUser.surname }}
+        {{ (state$ | async).currentUser.secondSurname }}
+      </h4>
+    </div>
+    <div class="col-12">
+      <p class="mb-1">Correo</p>
+      <h4 class="mb-0">{{ (state$ | async).currentUser.email }}</h4>
+    </div>
+    <div class="col-12">
+      <p class="mb-1">Fecha de nacimiento</p>
+      <h4 class="mb-0">{{ (state$ | async).currentUser.birthDate }}</h4>
+    </div>
+  </div>
+</section>
+<section class="normal-padding">
+  <div class="row">
+    <div class="col-10">
+      <h3 class="mb-0"><a routerLink="/account/ailments">Padecimientos</a></h3>
+    </div>
+    <div class="col-2 text-center">
+      <a routerLink="/account/ailments">
+        <i class="fas fa-chevron-circle-right color-icon"></i
+      ></a>
+    </div>
+  </div>
+</section>
+<section class="normal-padding">
+  <div class="row">
+    <div class="col-10">
+      <h3 class="mb-0"><a routerLink="/account/address">Direcciones</a></h3>
+    </div>
+    <div class="col-2 text-center">
+      <a routerLink="/account/address">
+        <i class="fas fa-chevron-circle-right color-icon"></i
+      ></a>
+    </div>
+  </div>
+</section>
+<section class="normal-padding">
+  <div class="row">
+    <div class="col-12">
+      <h3>Datos de facturación</h3>
+    </div>
+    <div class="col-8">
+      <h4 class="mb-1">Nombre</h4>
+      <p class="mb-0">Empresa S.A</p>
+    </div>
+    <div class="col-4">
+      <h4 class="mb-1">Razon Social</h4>
+      <p class="mb-0">Empresa S.A</p>
+    </div>
+    <div class="col-12">
+      <h4 class="mb-1">Domicilio</h4>
+      <p class="mb-0">Independencia Sur</p>
+    </div>
+    <div class="col-12">
+      <h4 class="mb-1">Numero de identificación fiscal</h4>
+      <p class="mb-0">123 456 789</p>
+    </div>
+  </div>
+</section>
+<section class="normal-padding">
+  <div class="row">
+    <div class="col-8">
+      <h2 id="content">Metodo de pago</h2>
+    </div>
+    <div class="col-4 text-center">
+      <button
+        class="link"
+        (click)="shoppingAddCard()"
+        *ngIf="!(state$ | async).shoppingAddCard"
+      >
+        Agregar nueva tarjeta
+      </button>
+      <button
+        class="link"
+        (click)="shoppingCloseAddCard()"
+        *ngIf="(state$ | async).shoppingAddCard"
+      >
+        Usar tarjeta guardada
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!(state$ | async).shoppingAddCard">
+    <div class="box mb-0" *ngFor="let item of (state$ | async).cards">
+      <div class="row">
+        <div class="col-10 col-12-small">
+          <input
+            type="radio"
+            id="demo-card-priority-low_{{ item.id }}"
+            name="demo-card-priority"
+            (click)="changeCard(item)"
+            checked
+            *ngIf="item.active == 1"
+          />
+          <input
+            type="radio"
+            id="demo-card-priority-low_{{ item.id }}"
+            name="demo-card-priority"
+            (click)="changeCard(item)"
+            *ngIf="item.active != 1"
+          />
+          <label for="demo-card-priority-low_{{ item.id }}">
+            <h4 class="mb-1">{{ item.card_number }}</h4>
+          </label>
+        </div>
+        <div class="col-12">
+          <h4 class="mb-1">Nombre</h4>
+          <p class="mb-0">{{ item.holder_name }}</p>
+        </div>
+        <div class="col-12">
+          <h4 class="mb-1">Banco</h4>
+          <p class="mb-0">{{ item.bank_name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-container *ngIf="(state$ | async).shoppingAddCard">
+  <div class="box">
+    <app-credit-card-form
+      (submitForm)="createCard($event)"
+    ></app-credit-card-form>
+  </div>
+</ng-container>
+<section class="normal-padding">
+  <div class="row">
+    <div class="col-12">
+      <h3>Notificaciones</h3>
+    </div>
+
+    <div class="col-8">
+      <h4 class="mb-1">Activar notificaciones</h4>
+    </div>
+    <div class="col-4 text-end">
+      <input type="checkbox" id="demo-human" name="demo-human" checked="" />
+      <label for="demo-human"></label>
+    </div>
+    <div class="col-8">
+      <h4 class="mb-1">Insumo sin abastecimiento</h4>
+    </div>
+    <div class="col-4 text-end">
+      <input type="checkbox" id="demo-human" name="demo-human" checked="" />
+      <label for="demo-human"></label>
+    </div>
+    <div class="col-8">
+      <h4 class="mb-1">
+        Alerta de proximidad de finalizacion de abastecimiento
+      </h4>
+    </div>
+    <div class="col-4 text-end">
+      <select
+        name="demo-category"
+        id="demo-category"
+        style="max-width: 100px; margin: 0 0 0 auto"
+      >
+        <option value="">1</option>
+        <option value="1">2</option>
+        <option value="1">3</option>
+        <option value="1">4</option>
+        <option value="1">5</option>
+      </select>
+      <p class="mb-0">Semanas</p>
+    </div>
+  </div>
+</section>
+<section class="normal-padding">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <button
+        class="button primary fit icon fa-logout"
+        (click)="onCloseSession($event)"
+      >
+        Cerrar sesion
+      </button>
+    </div>
+  </div>
+</section>

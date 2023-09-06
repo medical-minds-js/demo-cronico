@@ -1,0 +1,82 @@
+<app-header></app-header>
+<!-- <div class="row">
+  <div class="col-4 offset-4 login-top">
+    <span class="image fit"><img src="assets/images/pic02.jpg" alt="" /></span>
+  </div>
+</div> -->
+<div class="row gtr-200 container-login">
+  <div class="col-12 col-md-6 offset-0 offset-md-3">
+    <div class="box">
+      <form
+        [formGroup]="form"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="row gtr-uniform">
+          <div class="col-12">
+            <label for="demo-category">Correo</label>
+            <input
+              type="text"
+              name="demo-name"
+              id="demo-name"
+              value=""
+              formControlName="inputName"
+              placeholder="Ingrese correo"
+            />
+            <ng-container *ngIf="form.controls.inputName.errors && submited">
+              <p *ngIf="form.controls.inputName.errors.required" class="error">
+                El campo correo es obligatorio
+              </p>
+              <p *ngIf="form.controls.inputName.errors.pattern" class="error">
+                El formato de correo es invalido
+              </p>
+            </ng-container>
+          </div>
+          <div class="col-12">
+            <label for="demo-category">Contraseña</label>
+            <input
+              type="password"
+              name="demo-email"
+              id="demo-email"
+              value=""
+              formControlName="inputPassword"
+              placeholder="Ingrese contraseña"
+            />
+            <ng-container
+              *ngIf="form.controls.inputPassword.errors && submited"
+            >
+              <p
+                *ngIf="form.controls.inputPassword.errors.required"
+                class="error"
+              >
+                El campo contraseña es obligatorio
+              </p>
+              <p
+                *ngIf="form.controls.inputPassword.errors.minLength"
+                class="error"
+              >
+                Ingrese minimo 6 caracteres
+              </p>
+            </ng-container>
+          </div>
+          <!-- Break -->
+          <div class="col-6 offset-3">
+            <input type="submit" value="Ingresar" class="button primary fit" />
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-6 offset-3">
+          <div class="midd-separator"></div>
+        </div>
+        <div class="col-12 text-center">
+          <a routerLink="/auth/register">Crear cuenta</a>
+        </div>
+        <div class="col-12 text-center">
+          <a routerLink="/auth/reset-pass">Olvide la contraseña</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
