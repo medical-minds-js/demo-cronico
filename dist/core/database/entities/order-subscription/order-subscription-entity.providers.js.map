@@ -1,0 +1,1 @@
+{"version":3,"file":"order-subscription-entity.providers.js","sourceRoot":"","sources":["../../../../../src/core/database/entities/order-subscription/order-subscription-entity.providers.ts"],"names":[],"mappings":";;;AAAA,kDAAmE;AACnE,2EAAsE;AAEzD,QAAA,4BAA4B,GAAG;IAC1C;QACE,OAAO,EAAE,yCAA6B;QACtC,QAAQ,EAAE,mDAAuB;KAClC;CACF,CAAC"}
