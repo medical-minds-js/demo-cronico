@@ -1,1 +1,0 @@
-{"version":3,"file":"wms-customer-requirement-entity.providers.js","sourceRoot":"","sources":["../../../../../src/core/database/entities/wms-customer-requirement-detail/wms-customer-requirement-entity.providers.ts"],"names":[],"mappings":";;;AAAA,kDAA+E;AAC/E,qGAAwF;AAE3E,QAAA,qCAAqC,GAAG;IACnD;QACE,OAAO,EAAE,qDAAyC;QAClD,QAAQ,EAAE,qEAA4B;KACvC;CACF,CAAC"}
