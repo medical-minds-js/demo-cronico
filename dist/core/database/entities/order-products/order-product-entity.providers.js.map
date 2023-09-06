@@ -1,0 +1,1 @@
+{"version":3,"file":"order-product-entity.providers.js","sourceRoot":"","sources":["../../../../../src/core/database/entities/order-products/order-product-entity.providers.ts"],"names":[],"mappings":";;;AAAA,kDAA8D;AAC9D,iEAA4D;AAE/C,QAAA,qBAAqB,GAAG;IACnC;QACE,OAAO,EAAE,oCAAwB;QACjC,QAAQ,EAAE,yCAAkB;KAC7B;CACF,CAAC"}

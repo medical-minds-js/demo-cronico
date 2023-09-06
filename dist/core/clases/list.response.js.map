@@ -1,0 +1,1 @@
+{"version":3,"file":"list.response.js","sourceRoot":"","sources":["../../../src/core/clases/list.response.ts"],"names":[],"mappings":";;;AAAA,MAAa,mBAAmB;IAG9B,YAAY,KAAY,EAAE,QAAgB,IAAI;QAC5C,IAAI,CAAC,MAAM,GAAG,SAAS,CAAC;QACxB,IAAI,CAAC,IAAI,GAAG,EAAE,KAAK,EAAE,OAAO,EAAE,KAAK,CAAC,MAAM,EAAE,KAAK,EAAE,KAAK,IAAI,KAAK,CAAC,MAAM,EAAE,CAAC;IAC7E,CAAC;CACF;AAPD,kDAOC"}
