@@ -18,6 +18,9 @@ const open_pay_utils_1 = require("../../core/services/open-pay/open-pay.utils");
 let CardsService = class CardsService {
     async getCardsByUser(userId) {
         const user = await this.usersService.getById(userId);
+        if (!user.openPayId) {
+            return [];
+        }
         const items = await this.cardsRepositoryService.findCardsByUser(userId);
         const cards = await this.openPayService.getCardsByUser(user.openPayId);
         return items

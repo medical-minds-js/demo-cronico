@@ -1,4 +1,3 @@
-import { CardEntity } from 'src/core/database/entities/cards/cards.entity';
 import { CreateCardDto } from './interfaces/create-card.dto.interface';
 export declare class CardsService {
     private readonly cardsRepositoryService;
@@ -16,7 +15,7 @@ export declare class CardsService {
         type: string;
         brand: string;
     }[]>;
-    getActiveByUser(userId: number): Promise<CardEntity>;
+    getActiveByUser(userId: number): Promise<import("../../core/database/entities/cards/cards.entity").CardEntity>;
     saveCardByUser(userId: number, card: CreateCardDto): Promise<string>;
     setDefaultCardByUser(userId: number, cardId: number): Promise<string>;
 }
