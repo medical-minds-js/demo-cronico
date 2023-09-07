@@ -15,6 +15,7 @@ const cards_repository_service_1 = require("./cards-repository.service");
 const open_pay_service_1 = require("../../core/services/open-pay/open-pay.service");
 const users_service_1 = require("../users/users.service");
 const open_pay_utils_1 = require("../../core/services/open-pay/open-pay.utils");
+const fail_response_1 = require("../../core/clases/fail.response");
 let CardsService = class CardsService {
     async getCardsByUser(userId) {
         const user = await this.usersService.getById(userId);
@@ -39,10 +40,18 @@ let CardsService = class CardsService {
         await this.cardsRepositoryService.disableAllCardsByUser(userId);
         await this.cardsRepositoryService.saveCardByUser(Object.assign(Object.assign({}, card), { userId }));
         const user = await this.usersService.getById(userId);
-        await this.openPayService.addCardToCustomer(user.openPayId, {
-            token_id: card.cardOpenPayId,
-            device_session_id: card.deviceSession,
-        });
+        try {
+            await this.openPayService.addCardToCustomer(user.openPayId, {
+                token_id: card.cardOpenPayId,
+                device_session_id: card.deviceSession,
+            });
+        }
+        catch (e) {
+            if (e.error_code === 3001) {
+                throw new fail_response_1.FailResponse('La tarjeta fue declinada por el banco');
+            }
+            throw new fail_response_1.FailResponse(e.error_message);
+        }
         return 'Tarjeta guardada';
     }
     async setDefaultCardByUser(userId, cardId) {

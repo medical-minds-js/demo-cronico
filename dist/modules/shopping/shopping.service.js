@@ -28,13 +28,20 @@ const open_pay_service_1 = require("../../core/services/open-pay/open-pay.servic
 const products_service_1 = require("../products/products.service");
 const wms_customer_requirement_repository_service_1 = require("./wms-customer-requirement-repository.service");
 const users_service_1 = require("../users/users.service");
+const fail_response_1 = require("../../core/clases/fail.response");
 let ShoppingService = class ShoppingService {
     async createOrder(confirmOrder, order, subscriptions) {
         const saved = await this.orderRepository.saveFullOrder(order);
         await this.subscriptionsService.updateOrderId(saved.id, subscriptions.map((item) => item.id));
         const newOrder = Object.assign(Object.assign({}, order), { id: saved.id });
         const user = await this.userService.getById(order.userId);
-        const paymentProcessed = await this.openPayService.processPayment(confirmOrder, newOrder, user);
+        let paymentProcessed;
+        try {
+            paymentProcessed = await this.openPayService.processPayment(confirmOrder, newOrder, user);
+        }
+        catch (e) {
+            throw new fail_response_1.FailResponse(e.error_message);
+        }
         if (paymentProcessed.status === 'completed') {
             await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
             await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
