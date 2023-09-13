@@ -59,6 +59,7 @@ let UsersRepositoryService = class UsersRepositoryService {
             secondSurname: data.secondSurname,
             birthDate: data.birthDate,
             picture: data.picture,
+            cellPhone: data.cellPhone,
         }, {
             where: { id: [data.id] },
         });

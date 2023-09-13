@@ -14,6 +14,7 @@ export declare class UserEntity extends Model {
     picture: string;
     userName: string;
     email: string;
+    cellPhone: string;
     pass: string;
     salt: string;
     enableOpenPay: string;

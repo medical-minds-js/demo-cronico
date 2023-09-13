@@ -58,6 +58,10 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "email", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'CELL_PHONE', type: sequelize_typescript_1.DataType.STRING(10) }),
+    __metadata("design:type", String)
+], UserEntity.prototype, "cellPhone", void 0);
+__decorate([
     (0, sequelize_typescript_1.Column)({ field: 'PASS', type: sequelize_typescript_1.DataType.STRING(200) }),
     __metadata("design:type", String)
 ], UserEntity.prototype, "pass", void 0);
