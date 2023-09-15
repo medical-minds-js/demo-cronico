@@ -32,6 +32,14 @@ __decorate([
     __metadata("design:type", String)
 ], SupplyRequestEntity.prototype, "supply", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'MESSAGE', type: sequelize_typescript_1.DataType.STRING(255) }),
+    __metadata("design:type", String)
+], SupplyRequestEntity.prototype, "message", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'REASON', type: sequelize_typescript_1.DataType.STRING(100) }),
+    __metadata("design:type", String)
+], SupplyRequestEntity.prototype, "reason", void 0);
+__decorate([
     sequelize_typescript_1.CreatedAt,
     (0, sequelize_typescript_1.Column)({ field: 'created_at', type: sequelize_typescript_1.DataType.DATE }),
     __metadata("design:type", Date)

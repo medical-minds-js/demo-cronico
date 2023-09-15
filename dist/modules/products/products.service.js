@@ -40,6 +40,11 @@ let ProductsService = class ProductsService {
         }
         if (ailmentsIds.length > 0) {
             ailments = await this.productRepository.viewAilmentsByIdList(ailmentsIds.map((i) => i.id));
+            ailments.map((ailment) => {
+                ailment.products.map((p) => {
+                    console.log(p);
+                });
+            });
         }
         const items = ids.map((search) => {
             if (search.type === 1) {
@@ -80,6 +85,9 @@ let ProductsService = class ProductsService {
         return products.map((item) => {
             if (item.productType === 2) {
                 const products = item.productParts.map((part) => parts.find((product) => product.id === part.productPartId));
+                products.map((item) => {
+                    console.log(item);
+                });
                 return Object.assign(Object.assign({}, item), { products });
             }
             return item;

@@ -15,6 +15,9 @@ function UserMapper(user) {
         email: user.email,
         picture: user.picture,
         enableOpenPay: user.enableOpenPay,
+        cellPhone: user.cellPhone,
+        gender: user.gender,
+        statusInfo: user.statusInfo,
     };
 }
 exports.UserMapper = UserMapper;

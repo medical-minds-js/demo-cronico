@@ -106,10 +106,12 @@ let UsersService = class UsersService {
         return list;
     }
     async addAilments(userId, ailments) {
+        console.log(ailments);
         const products = await this.userRepository.getProductsAilments(ailments.id);
         const data = {
             userId,
             ailmentsId: ailments.id,
+            typeDetection: ailments.typeDetection,
             userAilmentsProducts: products.map((i) => ({
                 productId: i.id,
             })),

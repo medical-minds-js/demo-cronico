@@ -4,5 +4,7 @@ export declare class SupplyRequestEntity extends Model {
     name: number;
     email: number;
     supply: string;
+    message: string;
+    reason: string;
     createdAt: Date;
 }

@@ -20,7 +20,6 @@ const success_response_1 = require("../../core/clases/success.response");
 const auth_guard_1 = require("../auth/guard/auth.guard");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
-const ailment_entity_1 = require("../../core/database/entities/ailments/ailment.entity");
 const ailments_service_1 = require("../ailments/ailments.service");
 const user_ailments_product_entity_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product.entity");
 let UsersController = class UsersController {
@@ -47,8 +46,8 @@ let UsersController = class UsersController {
         const list = await this.usersService.getUserAilments(req.user.sub, filters);
         return new success_list_response_1.SuccessListResponse(list);
     }
-    async addAilments(req, ailments) {
-        const data = await this.usersService.addAilments(req.user.sub, ailments);
+    async addAilments(req, ailmentData) {
+        const data = await this.usersService.addAilments(req.user.sub, ailmentData);
         return new success_response_1.SuccessResponse(data);
     }
     async getDoseByAilments(req, params) {
@@ -126,7 +125,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, ailment_entity_1.AilmentEntity]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "addAilments", null);
 __decorate([

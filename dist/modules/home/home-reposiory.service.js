@@ -24,6 +24,8 @@ let HomeRepositoryService = class HomeRepositoryService {
             name: data.name,
             email: data.email,
             supply: data.supply,
+            message: data.message,
+            reason: data.reason,
             createdAt: new Date(),
         });
     }

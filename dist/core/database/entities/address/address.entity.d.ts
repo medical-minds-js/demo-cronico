@@ -13,6 +13,8 @@ export declare class AddressEntity extends Model {
     comments: string;
     state: string;
     reference: string;
+    phoneContact: string;
+    nameContact: string;
     status: number;
     cretedAt: number;
     deletedAt: number;

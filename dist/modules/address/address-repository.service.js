@@ -60,6 +60,8 @@ let AddressRepositoryService = class AddressRepositoryService {
             comments: address.comments,
             state: address.state,
             reference: address.reference,
+            phoneContact: address.phoneContact,
+            nameContact: address.nameContact,
             status: address.status,
         });
     }
@@ -88,6 +90,8 @@ let AddressRepositoryService = class AddressRepositoryService {
             comments: address.comments,
             state: address.state,
             reference: address.reference,
+            phoneContact: address.phoneContact,
+            nameContact: address.nameContact,
             status: address.status,
         }, { where: { id: [id] } });
     }

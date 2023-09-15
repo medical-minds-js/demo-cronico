@@ -4,5 +4,7 @@ export declare class UserAilmentsEntity extends Model {
     id: number;
     userId: number;
     ailmentsId: number;
+    typeDetection: number;
+    createdAt: Date;
     userAilmentsProducts: UserAilmentsProductEntity[];
 }

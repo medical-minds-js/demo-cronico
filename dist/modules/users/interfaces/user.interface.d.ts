@@ -11,6 +11,9 @@ export interface User {
     birthDate: Date;
     userName: string;
     email: string;
+    cellPhone: string;
+    gender: number;
+    statusInfo: number;
     picture: string;
     enableOpenPay: string;
 }

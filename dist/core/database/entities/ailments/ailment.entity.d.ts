@@ -11,5 +11,6 @@ export declare class AilmentEntity extends Model {
     images: AilmentsImageEntity[];
     productParts: ProductAilmentsEntity[];
     searchType: number;
+    typeDetection: number;
     users: UserEntity[];
 }

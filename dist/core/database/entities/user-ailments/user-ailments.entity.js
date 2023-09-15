@@ -33,6 +33,15 @@ __decorate([
     __metadata("design:type", Number)
 ], UserAilmentsEntity.prototype, "ailmentsId", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'TYPE_DETECTION', type: sequelize_typescript_1.DataType.INTEGER({ length: 6 }) }),
+    __metadata("design:type", Number)
+], UserAilmentsEntity.prototype, "typeDetection", void 0);
+__decorate([
+    sequelize_typescript_1.CreatedAt,
+    (0, sequelize_typescript_1.Column)({ field: 'CREATED_AT' }),
+    __metadata("design:type", Date)
+], UserAilmentsEntity.prototype, "createdAt", void 0);
+__decorate([
     (0, sequelize_typescript_1.HasMany)(() => user_ailments_product_entity_1.UserAilmentsProductEntity),
     __metadata("design:type", Array)
 ], UserAilmentsEntity.prototype, "userAilmentsProducts", void 0);
