@@ -70,7 +70,11 @@ UNION ALL
     }
     async viewAilmentsByIdList(ailmentsIds) {
         const data = await this.ailmentRepository.findAll({
-            include: [ailment_images_entity_1.AilmentsImageEntity, product_ailments_entity_1.ProductAilmentsEntity, product_entity_1.ProductEntity],
+            include: [
+                ailment_images_entity_1.AilmentsImageEntity,
+                product_ailments_entity_1.ProductAilmentsEntity,
+                { model: product_entity_1.ProductEntity, include: [product_images_entity_1.ProductImageEntity] },
+            ],
             where: { id: { [sequelize_1.Op.in]: ailmentsIds } },
         });
         return data.map((i) => i.get({ plain: true }));
