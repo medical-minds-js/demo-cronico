@@ -38,22 +38,27 @@ let ShoppingService = class ShoppingService {
         let paymentProcessed;
         try {
             paymentProcessed = await this.openPayService.processPayment(confirmOrder, newOrder, user);
+            if (paymentProcessed.status === 'completed') {
+                await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
+                await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
+                await this.subscriptionsService.changePaidStatus(subscriptions);
+                await Promise.all(subscriptions.map((item) => this.sendRequiementWms(order.user.id, item)));
+                return newOrder;
+            }
+            else {
+                await this.orderRepository.changeNoPaymentStatus(newOrder.id);
+                this.subscriptionsService.changeNoPaymentStatus(subscriptions.map((item) => item.id));
+                throw new Error('Error al procesar el pago');
+            }
         }
         catch (e) {
             console.log(e);
-            throw new fail_response_1.FailResponse(e);
-        }
-        if (paymentProcessed.status === 'completed') {
-            await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
-            await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
-            await this.subscriptionsService.changePaidStatus(subscriptions);
-            await Promise.all(subscriptions.map((item) => this.sendRequiementWms(order.user.id, item)));
-            return newOrder;
-        }
-        else {
             await this.orderRepository.changeNoPaymentStatus(newOrder.id);
             this.subscriptionsService.changeNoPaymentStatus(subscriptions.map((item) => item.id));
-            throw new Error('Error al procesar el pago');
+            if (e.error_code === 1006) {
+                throw new fail_response_1.FailResponse('La orden de compra ya se proceso anteriormente');
+            }
+            throw new fail_response_1.FailResponse(e);
         }
     }
     async sendRequiementWms(userId, subscription) {

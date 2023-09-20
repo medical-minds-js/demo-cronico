@@ -34,7 +34,6 @@ let OpenPayService = class OpenPayService {
         });
     }
     processPayment(confirmOrder, order, user) {
-        console.log(confirmOrder, order, user);
         return new Promise((resolve, reject) => {
             const totalItems = order.orderProducts.length;
             const description = 'Cronico - Compra de ' +
