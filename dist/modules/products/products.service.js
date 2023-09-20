@@ -17,7 +17,7 @@ let ProductsService = class ProductsService {
         return this.productRepository.viewOneById(1);
     }
     async getNewProducts() {
-        return this.productRepository.findNewProducts('2023-08-31');
+        return this.productRepository.findLastProducts();
     }
     async getHomePrincipalPackage() {
         return this.productRepository.viewOneById(3);

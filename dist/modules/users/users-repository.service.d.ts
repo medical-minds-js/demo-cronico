@@ -4,13 +4,15 @@ import { AilmentEntity } from 'src/core/database/entities/ailments/ailment.entit
 import { UserAilmentsEntity } from 'src/core/database/entities/user-ailments/user-ailments.entity';
 import { DoseTakenEntity } from 'src/core/database/entities/doses_taken/dose-taken.entity';
 import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
+import { UserSettingEntity } from 'src/core/database/entities/user-setting/user-setting.entity';
 export declare class UsersRepositoryService {
     private readonly userRepository;
     private readonly ailmentsRepository;
     private readonly userAilmentsRepository;
     private readonly userAilmentsProductsRepository;
     private readonly doseTakenRepository;
-    constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity);
+    private readonly userSettingRepository;
+    constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity, userSettingRepository: typeof UserSettingEntity);
     findAll(): Promise<UserEntity[]>;
     findOneById(id: number): Promise<UserEntity>;
     findLogin(loginDto: LoginDto): Promise<UserEntity>;
@@ -26,4 +28,14 @@ export declare class UsersRepositoryService {
     getUserAilments(id: number): Promise<UserAilmentsEntity>;
     viewDoseTakenByDate(userAilmentsId: number): Promise<DoseTakenEntity[]>;
     createDoseTaken(data: DoseTakenEntity): Promise<DoseTakenEntity>;
+    getSettings(id: number): Promise<{
+        id: any;
+        settingId: any;
+        code: any;
+        value: any;
+    }[]>;
+    findUserSetting(userId: number, settingId: number): Promise<UserSettingEntity>;
+    createSetting(data: UserSettingEntity): Promise<UserSettingEntity>;
+    updateSetting(id: any, value: any): Promise<[affectedCount: number]>;
+    findUserSettingById(id: any): Promise<UserSettingEntity>;
 }

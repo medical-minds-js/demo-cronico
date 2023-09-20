@@ -16,11 +16,13 @@ const order_subscription_entity_providers_1 = require("../../core/database/entit
 const order_entity_providers_1 = require("../../core/database/entities/order/order-entity.providers");
 const product_images_entity_providers_1 = require("../../core/database/entities/product-images/product-images-entity.providers");
 const product_entity_providers_1 = require("../../core/database/entities/product/product-entity.providers");
+const setting_entity_providers_1 = require("../../core/database/entities/settings/setting-entity.providers");
 const shopping_cart_entity_providers_1 = require("../../core/database/entities/shopping-carts/shopping-cart-entity.providers");
 const subscription_product_entity_providers_1 = require("../../core/database/entities/subscription-products/subscription-product-entity.providers");
 const subscription_entity_providers_1 = require("../../core/database/entities/subscription/subscription-entity.providers");
 const user_ailments_product_entity_providers_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product-entity.providers");
 const user_ailments_entity_providers_1 = require("../../core/database/entities/user-ailments/user-ailments-entity.providers");
+const user_setting_entity_providers_1 = require("../../core/database/entities/user-setting/user-setting-entity.providers");
 const user_entity_providers_1 = require("../../core/database/entities/user/user-entity.providers");
 const wms_customer_requirement_detail_entity_providers_1 = require("../../core/database/entities/wms-customer-requirement-detail/wms-customer-requirement-detail-entity.providers");
 const wms_customer_requirement_entity_providers_1 = require("../../core/database/entities/wms-customer-requirement/wms-customer-requirement-entity.providers");
@@ -41,12 +43,14 @@ SharedModule = __decorate([
             ...shopping_cart_entity_providers_1.shoppingCartEntityProviders,
             ...product_entity_providers_1.productEntityProviders,
             ...product_images_entity_providers_1.productImageEntityProviders,
+            ...setting_entity_providers_1.settingEntityProviders,
             ...ailment_entity_providers_1.ailmentEntityProviders,
             ...subscription_entity_providers_1.subscriptionEntityProviders,
             ...subscription_product_entity_providers_1.subscriptionProductEntityProviders,
             ...user_ailments_product_entity_providers_1.userAilmentsProductEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...user_ailments_entity_providers_1.userAilmentsEntityProviders,
+            ...user_setting_entity_providers_1.userSettingEntityProviders,
             ...dose_taken_entity_providers_1.doseTakenEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...ailment_entity_providers_1.ailmentEntityProviders,
@@ -64,12 +68,14 @@ SharedModule = __decorate([
             ...shopping_cart_entity_providers_1.shoppingCartEntityProviders,
             ...product_entity_providers_1.productEntityProviders,
             ...product_images_entity_providers_1.productImageEntityProviders,
+            ...setting_entity_providers_1.settingEntityProviders,
             ...ailment_entity_providers_1.ailmentEntityProviders,
             ...subscription_entity_providers_1.subscriptionEntityProviders,
             ...subscription_product_entity_providers_1.subscriptionProductEntityProviders,
             ...user_ailments_product_entity_providers_1.userAilmentsProductEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...user_ailments_entity_providers_1.userAilmentsEntityProviders,
+            ...user_setting_entity_providers_1.userSettingEntityProviders,
             ...dose_taken_entity_providers_1.doseTakenEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...ailment_entity_providers_1.ailmentEntityProviders,

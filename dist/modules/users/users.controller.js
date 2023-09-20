@@ -62,6 +62,18 @@ let UsersController = class UsersController {
         const result = await this.usersService.createDoseTaken(data);
         return new success_response_1.SuccessResponse(result);
     }
+    async getSettings(req) {
+        const result = await this.usersService.getSettings(req.user.sub);
+        return new success_list_response_1.SuccessListResponse(result);
+    }
+    async saveSetting(req, data) {
+        const result = await this.usersService.saveSettings(req.user.sub, data);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async updateSetting(req, data) {
+        const result = await this.usersService.updateSetting(req.user.sub, data);
+        return new success_response_1.SuccessResponse(result);
+    }
 };
 __decorate([
     (0, common_1.Inject)(users_service_1.UsersService),
@@ -152,6 +164,29 @@ __decorate([
     __metadata("design:paramtypes", [Object, user_ailments_product_entity_1.UserAilmentsProductEntity]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "createDoseByAilments", null);
+__decorate([
+    (0, common_1.Get)('/settings'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getSettings", null);
+__decorate([
+    (0, common_1.Post)('/settings'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "saveSetting", null);
+__decorate([
+    (0, common_1.Put)('/settings'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "updateSetting", null);
 UsersController = __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('api/v1/user')

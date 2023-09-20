@@ -17,4 +17,7 @@ export declare class UsersController {
     getDoseByAilments(req: any, params: any): Promise<SuccessListResponse>;
     configUserAilmentsProduct(params: any, data: UserAilmentsProductEntity): Promise<SuccessListResponse>;
     createDoseByAilments(req: any, data: UserAilmentsProductEntity): Promise<SuccessListResponse>;
+    getSettings(req: any): Promise<SuccessListResponse>;
+    saveSetting(req: any, data: any): Promise<SuccessListResponse>;
+    updateSetting(req: any, data: any): Promise<SuccessListResponse>;
 }

@@ -21,13 +21,15 @@ const ailment_entity_1 = require("../../core/database/entities/ailments/ailment.
 const sequelize_1 = require("sequelize");
 const user_ailments_product_entity_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product.entity");
 const product_entity_1 = require("../../core/database/entities/product/product.entity");
+const setting_entity_1 = require("../../core/database/entities/settings/setting.entity");
 let UsersRepositoryService = class UsersRepositoryService {
-    constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository) {
+    constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository, userSettingRepository) {
         this.userRepository = userRepository;
         this.ailmentsRepository = ailmentsRepository;
         this.userAilmentsRepository = userAilmentsRepository;
         this.userAilmentsProductsRepository = userAilmentsProductsRepository;
         this.doseTakenRepository = doseTakenRepository;
+        this.userSettingRepository = userSettingRepository;
     }
     async findAll() {
         return await this.userRepository.findAll({
@@ -147,6 +149,33 @@ let UsersRepositoryService = class UsersRepositoryService {
     async createDoseTaken(data) {
         return this.doseTakenRepository.create(Object.assign(Object.assign({}, data), { doseDate: new Date(), status: 1 }));
     }
+    async getSettings(id) {
+        const data = await this.userRepository.findOne({
+            where: { id },
+            include: [{ model: setting_entity_1.SettingEntity }],
+        });
+        return data.settings.map((i) => {
+            const item = i.get({ plain: true });
+            return {
+                id: item.UserSettingEntity.id,
+                settingId: item.UserSettingEntity.settingId,
+                code: item.code,
+                value: item.UserSettingEntity.value,
+            };
+        });
+    }
+    async findUserSetting(userId, settingId) {
+        return this.userSettingRepository.findOne({ where: { userId, settingId } });
+    }
+    async createSetting(data) {
+        return this.userSettingRepository.create(Object.assign({}, data));
+    }
+    async updateSetting(id, value) {
+        return this.userSettingRepository.update({ value }, { where: { id } });
+    }
+    async findUserSettingById(id) {
+        return this.userSettingRepository.findOne({ where: { id } });
+    }
 };
 UsersRepositoryService = __decorate([
     (0, common_1.Injectable)(),
@@ -155,7 +184,8 @@ UsersRepositoryService = __decorate([
     __param(2, (0, common_1.Inject)(constants_1.USER_AILMENTS_REPOSITORY)),
     __param(3, (0, common_1.Inject)(constants_1.USER_AILMENTS_PRODUCT_REPOSITORY)),
     __param(4, (0, common_1.Inject)(constants_1.DOSES_TAKEN_REPOSITORY)),
-    __metadata("design:paramtypes", [Object, Object, Object, Object, Object])
+    __param(5, (0, common_1.Inject)(constants_1.USER_SETTING_REPOSITORY)),
+    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object])
 ], UsersRepositoryService);
 exports.UsersRepositoryService = UsersRepositoryService;
 //# sourceMappingURL=users-repository.service.js.map

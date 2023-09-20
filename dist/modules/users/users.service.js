@@ -134,6 +134,25 @@ let UsersService = class UsersService {
         const data = { subscriptionProductId: info.id };
         return this.userRepository.createDoseTaken(data);
     }
+    async getSettings(id) {
+        return this.userRepository.getSettings(id);
+    }
+    async saveSettings(userId, data) {
+        const previos = await this.userRepository.findUserSetting(userId, data.settingId);
+        if (previos) {
+            return this.updateSetting(previos.id, data);
+        }
+        const info = {
+            userId: userId,
+            settingId: data.settingId,
+            value: data.value,
+        };
+        return this.userRepository.createSetting(info);
+    }
+    async updateSetting(id, data) {
+        await this.userRepository.updateSetting(id, data.value);
+        return this.userRepository.findUserSettingById(id);
+    }
 };
 __decorate([
     (0, common_1.Inject)(users_repository_service_1.UsersRepositoryService),

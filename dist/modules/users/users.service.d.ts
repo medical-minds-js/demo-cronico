@@ -6,6 +6,7 @@ import { AilmentsFilters } from '../ailments/interfaces/ailments-filters';
 import { DoseTakenEntity } from 'src/core/database/entities/doses_taken/dose-taken.entity';
 import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
 import { AilmentAdd } from './interfaces/ailmentAdd.interface';
+import { UserSettingEntity } from 'src/core/database/entities/user-setting/user-setting.entity';
 export declare class UsersService {
     private readonly userRepository;
     private readonly openPayService;
@@ -23,4 +24,12 @@ export declare class UsersService {
     getFullUserAilments(id: any): Promise<any>;
     configUserAilmentsProduct(id: number, data: UserAilmentsProductEntity): Promise<void>;
     createDoseTaken(info: UserAilmentsProductEntity): Promise<DoseTakenEntity>;
+    getSettings(id: number): Promise<{
+        id: any;
+        settingId: any;
+        code: any;
+        value: any;
+    }[]>;
+    saveSettings(userId: number, data: any): Promise<UserSettingEntity>;
+    updateSetting(id: number, data: any): Promise<UserSettingEntity>;
 }

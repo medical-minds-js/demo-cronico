@@ -37,6 +37,8 @@ const user_ailments_entity_1 = require("./entities/user-ailments/user-ailments.e
 const user_ailments_product_entity_1 = require("./entities/user-ailments-product/user-ailments-product.entity");
 const dose_taken_entity_1 = require("./entities/doses_taken/dose-taken.entity");
 const order_subscription_entity_1 = require("./entities/order-subscription/order-subscription.entity");
+const setting_entity_1 = require("./entities/settings/setting.entity");
+const user_setting_entity_1 = require("./entities/user-setting/user-setting.entity");
 exports.databaseProviders = [
     {
         provide: 'SEQUELIZE',
@@ -49,6 +51,7 @@ exports.databaseProviders = [
             sequelize.addModels([
                 profile_entity_1.ProfileEntity,
                 type_media_entity_1.TypeMediaEntity,
+                setting_entity_1.SettingEntity,
                 user_entity_1.UserEntity,
                 address_entity_1.AddressEntity,
                 deliveries_times_entity_1.DeliveryTimeEntity,
@@ -78,6 +81,7 @@ exports.databaseProviders = [
                 supply_request_entity_1.SupplyRequestEntity,
                 user_ailments_entity_1.UserAilmentsEntity,
                 user_ailments_product_entity_1.UserAilmentsProductEntity,
+                user_setting_entity_1.UserSettingEntity,
                 dose_taken_entity_1.DoseTakenEntity,
                 wms_customer_requirement_entity_1.WmsCustomerRequirementEntity,
                 wms_customer_requirement_detail_entity_1.WmsCustomerRequirementDetailEntity,

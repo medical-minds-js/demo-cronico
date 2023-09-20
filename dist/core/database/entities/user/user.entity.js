@@ -17,6 +17,8 @@ const order_entity_1 = require("../order/order.entity");
 const cards_entity_1 = require("../cards/cards.entity");
 const ailment_entity_1 = require("../ailments/ailment.entity");
 const user_ailments_entity_1 = require("../user-ailments/user-ailments.entity");
+const setting_entity_1 = require("../settings/setting.entity");
+const user_setting_entity_1 = require("../user-setting/user-setting.entity");
 let UserEntity = class UserEntity extends sequelize_typescript_1.Model {
 };
 __decorate([
@@ -113,6 +115,13 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "ailments", void 0);
+__decorate([
+    (0, sequelize_typescript_1.BelongsToMany)(() => setting_entity_1.SettingEntity, {
+        through: { model: () => user_setting_entity_1.UserSettingEntity },
+        foreignKey: 'userId',
+    }),
+    __metadata("design:type", Array)
+], UserEntity.prototype, "settings", void 0);
 UserEntity = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'app_t_101_users',

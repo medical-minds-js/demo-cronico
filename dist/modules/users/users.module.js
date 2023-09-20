@@ -18,6 +18,7 @@ const open_pay_service_1 = require("../../core/services/open-pay/open-pay.servic
 const user_ailments_entity_1 = require("../../core/database/entities/user-ailments/user-ailments.entity");
 const ailments_service_1 = require("../ailments/ailments.service");
 const ailments_repository_service_1 = require("../ailments/ailments-repository.service");
+const user_setting_entity_1 = require("../../core/database/entities/user-setting/user-setting.entity");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
@@ -30,8 +31,9 @@ UsersModule = __decorate([
             user_ailments_entity_1.UserAilmentsEntity,
             ailments_service_1.AilmentsService,
             ailments_repository_service_1.AilmentsRepositoryService,
+            user_setting_entity_1.UserSettingEntity,
         ],
-        imports: [shared_module_1.SharedModule, jwt_1.JwtModule.register(constansts_1.jwtOptions), shared_module_1.SharedModule],
+        imports: [shared_module_1.SharedModule, jwt_1.JwtModule.register(constansts_1.jwtOptions)],
         exports: [users_service_1.UsersService],
     })
 ], UsersModule);

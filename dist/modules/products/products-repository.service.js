@@ -131,12 +131,11 @@ UNION ALL
         });
         return Object.assign(Object.assign({}, product), { productParts: items.map((i) => i.get({ plain: true })) });
     }
-    async findNewProducts(date) {
-        const startedDate = new Date(date + ' 00:00:00');
-        const endDate = new Date(date + ' 11:59:59');
+    async findLastProducts() {
+        console.log('findLastProducts');
         return await this.productRepository.findAll({
-            where: { createdAt: { [sequelize_1.Op.between]: [startedDate, endDate] } },
-            include: [sale_entity_1.SaleEntity, ailment_entity_1.AilmentEntity, product_images_entity_1.ProductImageEntity],
+            include: [product_images_entity_1.ProductImageEntity],
+            order: [['createdAt', 'DESC']],
             limit: 2,
         });
     }
