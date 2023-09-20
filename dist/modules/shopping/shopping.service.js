@@ -40,7 +40,8 @@ let ShoppingService = class ShoppingService {
             paymentProcessed = await this.openPayService.processPayment(confirmOrder, newOrder, user);
         }
         catch (e) {
-            throw new fail_response_1.FailResponse(e.error_message);
+            console.log(e);
+            throw new fail_response_1.FailResponse(e);
         }
         if (paymentProcessed.status === 'completed') {
             await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
