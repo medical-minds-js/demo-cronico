@@ -22,6 +22,7 @@ const sequelize_1 = require("sequelize");
 const user_ailments_product_entity_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product.entity");
 const product_entity_1 = require("../../core/database/entities/product/product.entity");
 const setting_entity_1 = require("../../core/database/entities/settings/setting.entity");
+const product_images_entity_1 = require("../../core/database/entities/product-images/product-images.entity");
 let UsersRepositoryService = class UsersRepositoryService {
     constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository, userSettingRepository) {
         this.userRepository = userRepository;
@@ -123,7 +124,12 @@ let UsersRepositoryService = class UsersRepositoryService {
             include: [
                 {
                     model: user_ailments_product_entity_1.UserAilmentsProductEntity,
-                    include: [product_entity_1.ProductEntity],
+                    include: [
+                        {
+                            model: product_entity_1.ProductEntity,
+                            include: [product_images_entity_1.ProductImageEntity],
+                        },
+                    ],
                 },
             ],
         });

@@ -5,4 +5,5 @@ export declare class ProductsController {
     private readonly productsService;
     getProducts(filters: ProductFilters): Promise<SuccessListResponse>;
     getProductById(params: any): Promise<SuccessResponse>;
+    getAilmentById(params: any): Promise<SuccessResponse>;
 }

@@ -104,6 +104,24 @@ UNION ALL
             ],
         });
     }
+    async findAilmentById(id) {
+        return this.ailmentRepository.findOne({
+            where: { id: [id] },
+            include: [
+                ailment_images_entity_1.AilmentsImageEntity,
+                product_ailments_entity_1.ProductAilmentsEntity,
+                {
+                    model: product_entity_1.ProductEntity,
+                    include: [
+                        sale_entity_1.SaleEntity,
+                        ailment_entity_1.AilmentEntity,
+                        product_parts_entity_1.ProductPartEntity,
+                        product_images_entity_1.ProductImageEntity,
+                    ],
+                },
+            ],
+        });
+    }
     async viewOneById(id) {
         const data = await this.productRepository.findOne({
             where: { id: [id] },

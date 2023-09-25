@@ -15,6 +15,7 @@ const users_service_1 = require("../users/users.service");
 const fail_response_1 = require("../../core/clases/fail.response");
 const jwt_1 = require("@nestjs/jwt");
 const password_strategy_service_1 = require("../../core/services/password-strategy/password-strategy.service");
+const send_email_service_1 = require("../../core/services/send-email/send-email.service");
 let AuthService = class AuthService {
     async register(data) {
         const previous = await this.usersService.findUserByEmail(data.email);
@@ -24,6 +25,7 @@ let AuthService = class AuthService {
         const randomSalt = this.passwordStrategy.generateSalt();
         const hassPass = this.passwordStrategy.generatePassword(data.pass, randomSalt);
         const user = await this.usersService.saveRegister(Object.assign(Object.assign({}, data), { profileId: 1, pass: hassPass, salt: randomSalt }));
+        this.sendEmailService.sendWelcomeMail(user);
         const payload = { sub: user.id, username: user.userName };
         const token = await this.jwtService.sign(payload);
         return { access_token: token };
@@ -54,6 +56,10 @@ __decorate([
     (0, common_1.Inject)(password_strategy_service_1.PasswordStrategyService),
     __metadata("design:type", password_strategy_service_1.PasswordStrategyService)
 ], AuthService.prototype, "passwordStrategy", void 0);
+__decorate([
+    (0, common_1.Inject)(send_email_service_1.SendEmailService),
+    __metadata("design:type", send_email_service_1.SendEmailService)
+], AuthService.prototype, "sendEmailService", void 0);
 AuthService = __decorate([
     (0, common_1.Injectable)()
 ], AuthService);

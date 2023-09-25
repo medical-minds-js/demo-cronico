@@ -69,6 +69,18 @@ let ProductsService = class ProductsService {
         }
         return product;
     }
+    async getAilmentById(id) {
+        const data = await this.productRepository.findAilmentById(id);
+        const product = data.get({ plain: true });
+        if (product.productType == 2) {
+            if (product.productParts.length === 0) {
+                return product;
+            }
+            const parts = await this.productRepository.viewPartProductsByIds(product.productParts.map((part) => part.productPartId));
+            return Object.assign(Object.assign({}, product), { productParts: parts });
+        }
+        return product;
+    }
     async viewProductByIds(ids) {
         const products = await this.productRepository.viewProductsByIds(ids);
         const allIds = [];

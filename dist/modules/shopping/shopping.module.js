@@ -19,6 +19,7 @@ const wms_customer_requirement_repository_service_1 = require("./wms-customer-re
 const products_module_1 = require("../products/products.module");
 const users_module_1 = require("../users/users.module");
 const shared_module_1 = require("../../shared/shared/shared.module");
+const send_email_module_1 = require("../../core/services/send-email/send-email.module");
 let ShoppingModule = class ShoppingModule {
 };
 ShoppingModule = __decorate([
@@ -36,6 +37,7 @@ ShoppingModule = __decorate([
             shared_module_1.SharedModule,
             products_module_1.ProductsModule,
             users_module_1.UsersModule,
+            send_email_module_1.SendEmailModule,
         ],
         exports: [shopping_service_1.ShoppingService],
     })

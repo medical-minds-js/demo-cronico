@@ -18,6 +18,7 @@ const constansts_1 = require("./constansts");
 const open_pay_service_1 = require("../../core/services/open-pay/open-pay.service");
 const ailments_service_1 = require("../ailments/ailments.service");
 const ailments_repository_service_1 = require("../ailments/ailments-repository.service");
+const send_email_module_1 = require("../../core/services/send-email/send-email.module");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -32,7 +33,12 @@ AuthModule = __decorate([
             ailments_repository_service_1.AilmentsRepositoryService,
         ],
         exports: [auth_service_1.AuthService],
-        imports: [shared_module_1.SharedModule, jwt_1.JwtModule.register(constansts_1.jwtOptions), shared_module_1.SharedModule],
+        imports: [
+            shared_module_1.SharedModule,
+            jwt_1.JwtModule.register(constansts_1.jwtOptions),
+            shared_module_1.SharedModule,
+            send_email_module_1.SendEmailModule,
+        ],
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

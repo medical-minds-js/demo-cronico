@@ -26,6 +26,10 @@ let ProductsController = class ProductsController {
         const data = await this.productsService.getProductById(params.id);
         return new success_response_1.SuccessResponse(data);
     }
+    async getAilmentById(params) {
+        const data = await this.productsService.getAilmentById(params.id);
+        return new success_response_1.SuccessResponse(data);
+    }
 };
 __decorate([
     (0, common_1.Inject)(products_service_1.ProductsService),
@@ -45,6 +49,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "getProductById", null);
+__decorate([
+    (0, common_1.Get)('/ailment/:id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "getAilmentById", null);
 ProductsController = __decorate([
     (0, common_1.Controller)('api/v1/products')
 ], ProductsController);

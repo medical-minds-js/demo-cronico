@@ -5,6 +5,7 @@ export declare class AuthService {
     private readonly usersService;
     private readonly jwtService;
     private readonly passwordStrategy;
+    private readonly sendEmailService;
     register(data: RegisterDto): Promise<AccessToken>;
     login(loginDto: LoginDto): Promise<AccessToken>;
 }

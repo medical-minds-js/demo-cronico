@@ -16,6 +16,7 @@ export declare class ProductsRepositoryService {
     viewProductsByIds(ids: number[]): Promise<ProductEntity[]>;
     viewPartProductsByIds(ids: number[]): Promise<ProductEntity[]>;
     findOneById(id: number): Promise<ProductEntity>;
+    findAilmentById(id: number): Promise<AilmentEntity>;
     viewOneById(id: number): Promise<ProductEntity>;
     findLastProducts(): Promise<ProductEntity[]>;
     getImagesByIds(ids: any): Promise<ProductImageEntity[]>;

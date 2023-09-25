@@ -11,6 +11,7 @@ export declare class ShoppingService {
     private readonly openPayService;
     private readonly productsService;
     private readonly userService;
+    private readonly sendEmailService;
     createOrder(confirmOrder: ConfirmOrder, order: OrderEntity, subscriptions: SubscriptionEntity[]): Promise<any>;
     private sendRequiementWms;
     private generateSyncData;

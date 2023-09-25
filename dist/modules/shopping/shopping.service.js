@@ -29,6 +29,7 @@ const products_service_1 = require("../products/products.service");
 const wms_customer_requirement_repository_service_1 = require("./wms-customer-requirement-repository.service");
 const users_service_1 = require("../users/users.service");
 const fail_response_1 = require("../../core/clases/fail.response");
+const send_email_service_1 = require("../../core/services/send-email/send-email.service");
 let ShoppingService = class ShoppingService {
     async createOrder(confirmOrder, order, subscriptions) {
         const saved = await this.orderRepository.saveFullOrder(order);
@@ -43,6 +44,7 @@ let ShoppingService = class ShoppingService {
                 await this.orderRepository.changePaidStatus(newOrder.id, paymentProcessed.id);
                 await this.subscriptionsService.changePaidStatus(subscriptions);
                 await Promise.all(subscriptions.map((item) => this.sendRequiementWms(order.user.id, item)));
+                this.sendEmailService.sendConfirmOrderMail(newOrder);
                 return newOrder;
             }
             else {
@@ -176,6 +178,10 @@ __decorate([
     (0, common_1.Inject)(users_service_1.UsersService),
     __metadata("design:type", users_service_1.UsersService)
 ], ShoppingService.prototype, "userService", void 0);
+__decorate([
+    (0, common_1.Inject)(send_email_service_1.SendEmailService),
+    __metadata("design:type", send_email_service_1.SendEmailService)
+], ShoppingService.prototype, "sendEmailService", void 0);
 ShoppingService = __decorate([
     (0, common_1.Injectable)()
 ], ShoppingService);
