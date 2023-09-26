@@ -17,14 +17,13 @@ const common_1 = require("@nestjs/common");
 const auth_guard_1 = require("../auth/guard/auth.guard");
 const postal_codes_service_1 = require("./postal-codes.service");
 const success_list_response_1 = require("../../core/clases/success-list.response");
-const fail_response_1 = require("../../core/clases/fail.response");
 let PostalCodesController = class PostalCodesController {
     async getActivePostalCodes(params) {
         const data = await this.cpService.getAll(params.code);
         if (data.length > 0) {
             return new success_list_response_1.SuccessListResponse(data);
         }
-        return new fail_response_1.FailResponse('Código postal no encontrado');
+        return new success_list_response_1.SuccessListResponse([]);
     }
 };
 __decorate([

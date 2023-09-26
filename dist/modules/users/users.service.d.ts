@@ -7,6 +7,7 @@ import { DoseTakenEntity } from 'src/core/database/entities/doses_taken/dose-tak
 import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
 import { AilmentAdd } from './interfaces/ailmentAdd.interface';
 import { UserSettingEntity } from 'src/core/database/entities/user-setting/user-setting.entity';
+import { UserFactInfoEntity } from 'src/core/database/entities/user-fact-info/user-fact-info.entity';
 export declare class UsersService {
     private readonly userRepository;
     private readonly openPayService;
@@ -32,4 +33,7 @@ export declare class UsersService {
     }[]>;
     saveSettings(userId: number, data: any): Promise<UserSettingEntity>;
     updateSetting(id: number, data: any): Promise<UserSettingEntity>;
+    getFactInfo(id: number): Promise<UserFactInfoEntity>;
+    saveFactInfo(data: UserFactInfoEntity): Promise<UserFactInfoEntity>;
+    updateFactInfo(id: number, data: UserFactInfoEntity): Promise<UserFactInfoEntity>;
 }

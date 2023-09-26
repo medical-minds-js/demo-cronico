@@ -5,6 +5,7 @@ import { UserAilmentsEntity } from 'src/core/database/entities/user-ailments/use
 import { DoseTakenEntity } from 'src/core/database/entities/doses_taken/dose-taken.entity';
 import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
 import { UserSettingEntity } from 'src/core/database/entities/user-setting/user-setting.entity';
+import { UserFactInfoEntity } from 'src/core/database/entities/user-fact-info/user-fact-info.entity';
 export declare class UsersRepositoryService {
     private readonly userRepository;
     private readonly ailmentsRepository;
@@ -12,7 +13,8 @@ export declare class UsersRepositoryService {
     private readonly userAilmentsProductsRepository;
     private readonly doseTakenRepository;
     private readonly userSettingRepository;
-    constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity, userSettingRepository: typeof UserSettingEntity);
+    private readonly userFactInfoRepository;
+    constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity, userSettingRepository: typeof UserSettingEntity, userFactInfoRepository: typeof UserFactInfoEntity);
     findAll(): Promise<UserEntity[]>;
     findOneById(id: number): Promise<UserEntity>;
     findLogin(loginDto: LoginDto): Promise<UserEntity>;
@@ -38,4 +40,7 @@ export declare class UsersRepositoryService {
     createSetting(data: UserSettingEntity): Promise<UserSettingEntity>;
     updateSetting(id: any, value: any): Promise<[affectedCount: number]>;
     findUserSettingById(id: any): Promise<UserSettingEntity>;
+    createFactInfo(data: UserFactInfoEntity): Promise<UserFactInfoEntity>;
+    updateFactInfo(id: number, value: UserFactInfoEntity): Promise<[affectedCount: number]>;
+    getFactInfoByUserId(userId: number): Promise<UserFactInfoEntity>;
 }

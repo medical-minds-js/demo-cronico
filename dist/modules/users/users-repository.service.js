@@ -24,13 +24,14 @@ const product_entity_1 = require("../../core/database/entities/product/product.e
 const setting_entity_1 = require("../../core/database/entities/settings/setting.entity");
 const product_images_entity_1 = require("../../core/database/entities/product-images/product-images.entity");
 let UsersRepositoryService = class UsersRepositoryService {
-    constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository, userSettingRepository) {
+    constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository, userSettingRepository, userFactInfoRepository) {
         this.userRepository = userRepository;
         this.ailmentsRepository = ailmentsRepository;
         this.userAilmentsRepository = userAilmentsRepository;
         this.userAilmentsProductsRepository = userAilmentsProductsRepository;
         this.doseTakenRepository = doseTakenRepository;
         this.userSettingRepository = userSettingRepository;
+        this.userFactInfoRepository = userFactInfoRepository;
     }
     async findAll() {
         return await this.userRepository.findAll({
@@ -182,6 +183,22 @@ let UsersRepositoryService = class UsersRepositoryService {
     async findUserSettingById(id) {
         return this.userSettingRepository.findOne({ where: { id } });
     }
+    async createFactInfo(data) {
+        return this.userFactInfoRepository.create(Object.assign({}, data));
+    }
+    async updateFactInfo(id, value) {
+        return this.userFactInfoRepository.update({
+            id: value.id,
+            userId: value.userId,
+            name: value.name,
+            fiscalName: value.fiscalName,
+            fiscalAddress: value.fiscalAddress,
+            fiscalNumber: value.fiscalNumber,
+        }, { where: { id } });
+    }
+    async getFactInfoByUserId(userId) {
+        return this.userFactInfoRepository.findOne({ where: { userId: userId } });
+    }
 };
 UsersRepositoryService = __decorate([
     (0, common_1.Injectable)(),
@@ -191,7 +208,8 @@ UsersRepositoryService = __decorate([
     __param(3, (0, common_1.Inject)(constants_1.USER_AILMENTS_PRODUCT_REPOSITORY)),
     __param(4, (0, common_1.Inject)(constants_1.DOSES_TAKEN_REPOSITORY)),
     __param(5, (0, common_1.Inject)(constants_1.USER_SETTING_REPOSITORY)),
-    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object])
+    __param(6, (0, common_1.Inject)(constants_1.USER_FACT_INFO_REPOSITORY)),
+    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object, Object])
 ], UsersRepositoryService);
 exports.UsersRepositoryService = UsersRepositoryService;
 //# sourceMappingURL=users-repository.service.js.map

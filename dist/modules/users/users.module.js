@@ -19,6 +19,7 @@ const user_ailments_entity_1 = require("../../core/database/entities/user-ailmen
 const ailments_service_1 = require("../ailments/ailments.service");
 const ailments_repository_service_1 = require("../ailments/ailments-repository.service");
 const user_setting_entity_1 = require("../../core/database/entities/user-setting/user-setting.entity");
+const user_fact_info_entity_1 = require("../../core/database/entities/user-fact-info/user-fact-info.entity");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
@@ -32,6 +33,7 @@ UsersModule = __decorate([
             ailments_service_1.AilmentsService,
             ailments_repository_service_1.AilmentsRepositoryService,
             user_setting_entity_1.UserSettingEntity,
+            user_fact_info_entity_1.UserFactInfoEntity,
         ],
         imports: [shared_module_1.SharedModule, jwt_1.JwtModule.register(constansts_1.jwtOptions)],
         exports: [users_service_1.UsersService],

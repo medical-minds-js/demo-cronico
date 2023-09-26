@@ -19,6 +19,7 @@ const ailment_entity_1 = require("../ailments/ailment.entity");
 const user_ailments_entity_1 = require("../user-ailments/user-ailments.entity");
 const setting_entity_1 = require("../settings/setting.entity");
 const user_setting_entity_1 = require("../user-setting/user-setting.entity");
+const user_fact_info_entity_1 = require("../user-fact-info/user-fact-info.entity");
 let UserEntity = class UserEntity extends sequelize_typescript_1.Model {
 };
 __decorate([
@@ -122,6 +123,10 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], UserEntity.prototype, "settings", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => user_fact_info_entity_1.UserFactInfoEntity),
+    __metadata("design:type", user_fact_info_entity_1.UserFactInfoEntity)
+], UserEntity.prototype, "factInfo", void 0);
 UserEntity = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'app_t_101_users',

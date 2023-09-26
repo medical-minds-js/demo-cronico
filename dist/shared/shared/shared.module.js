@@ -22,6 +22,7 @@ const subscription_product_entity_providers_1 = require("../../core/database/ent
 const subscription_entity_providers_1 = require("../../core/database/entities/subscription/subscription-entity.providers");
 const user_ailments_product_entity_providers_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product-entity.providers");
 const user_ailments_entity_providers_1 = require("../../core/database/entities/user-ailments/user-ailments-entity.providers");
+const user_fact_info_providers_1 = require("../../core/database/entities/user-fact-info/user-fact-info.providers");
 const user_setting_entity_providers_1 = require("../../core/database/entities/user-setting/user-setting-entity.providers");
 const user_entity_providers_1 = require("../../core/database/entities/user/user-entity.providers");
 const wms_customer_requirement_detail_entity_providers_1 = require("../../core/database/entities/wms-customer-requirement-detail/wms-customer-requirement-detail-entity.providers");
@@ -51,6 +52,7 @@ SharedModule = __decorate([
             ...user_entity_providers_1.userEntityProviders,
             ...user_ailments_entity_providers_1.userAilmentsEntityProviders,
             ...user_setting_entity_providers_1.userSettingEntityProviders,
+            ...user_fact_info_providers_1.UserFactInfoEntityProviders,
             ...dose_taken_entity_providers_1.doseTakenEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...ailment_entity_providers_1.ailmentEntityProviders,
@@ -76,6 +78,7 @@ SharedModule = __decorate([
             ...user_entity_providers_1.userEntityProviders,
             ...user_ailments_entity_providers_1.userAilmentsEntityProviders,
             ...user_setting_entity_providers_1.userSettingEntityProviders,
+            ...user_fact_info_providers_1.UserFactInfoEntityProviders,
             ...dose_taken_entity_providers_1.doseTakenEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...ailment_entity_providers_1.ailmentEntityProviders,

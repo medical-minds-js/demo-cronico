@@ -106,7 +106,6 @@ let UsersService = class UsersService {
         return list;
     }
     async addAilments(userId, ailments) {
-        console.log(ailments);
         const products = await this.userRepository.getProductsAilments(ailments.id);
         const data = {
             userId,
@@ -152,6 +151,20 @@ let UsersService = class UsersService {
     async updateSetting(id, data) {
         await this.userRepository.updateSetting(id, data.value);
         return this.userRepository.findUserSettingById(id);
+    }
+    async getFactInfo(id) {
+        const factInfoFinded = await this.userRepository.getFactInfoByUserId(id);
+        if (!factInfoFinded) {
+            throw new common_1.NotFoundException('Registro no encontrado');
+        }
+        return factInfoFinded;
+    }
+    async saveFactInfo(data) {
+        return await this.userRepository.createFactInfo(data);
+    }
+    async updateFactInfo(id, data) {
+        await this.userRepository.updateFactInfo(id, data);
+        return this.getFactInfo(data.userId);
     }
 };
 __decorate([

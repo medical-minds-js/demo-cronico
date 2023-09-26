@@ -74,6 +74,18 @@ let UsersController = class UsersController {
         const result = await this.usersService.updateSetting(req.user.sub, data);
         return new success_response_1.SuccessResponse(result);
     }
+    async getUserFactInfo(req) {
+        const result = await this.usersService.getFactInfo(req.user.sub);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async saveFactInfo(req, data) {
+        const result = await this.usersService.saveFactInfo(data);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async updateFactInfo(req, data) {
+        const result = await this.usersService.updateFactInfo(req.user.sub, data);
+        return new success_response_1.SuccessResponse(result);
+    }
 };
 __decorate([
     (0, common_1.Inject)(users_service_1.UsersService),
@@ -187,6 +199,29 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "updateSetting", null);
+__decorate([
+    (0, common_1.Get)('/factInfo'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUserFactInfo", null);
+__decorate([
+    (0, common_1.Post)('/factInfo'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "saveFactInfo", null);
+__decorate([
+    (0, common_1.Put)('/factInfo/update'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "updateFactInfo", null);
 UsersController = __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('api/v1/user')

@@ -39,6 +39,7 @@ const dose_taken_entity_1 = require("./entities/doses_taken/dose-taken.entity");
 const order_subscription_entity_1 = require("./entities/order-subscription/order-subscription.entity");
 const setting_entity_1 = require("./entities/settings/setting.entity");
 const user_setting_entity_1 = require("./entities/user-setting/user-setting.entity");
+const user_fact_info_entity_1 = require("./entities/user-fact-info/user-fact-info.entity");
 exports.databaseProviders = [
     {
         provide: 'SEQUELIZE',
@@ -81,6 +82,7 @@ exports.databaseProviders = [
                 supply_request_entity_1.SupplyRequestEntity,
                 user_ailments_entity_1.UserAilmentsEntity,
                 user_ailments_product_entity_1.UserAilmentsProductEntity,
+                user_fact_info_entity_1.UserFactInfoEntity,
                 user_setting_entity_1.UserSettingEntity,
                 dose_taken_entity_1.DoseTakenEntity,
                 wms_customer_requirement_entity_1.WmsCustomerRequirementEntity,

@@ -5,6 +5,7 @@ import { OrderEntity } from '../order/order.entity';
 import { CardEntity } from '../cards/cards.entity';
 import { AilmentEntity } from '../ailments/ailment.entity';
 import { SettingEntity } from '../settings/setting.entity';
+import { UserFactInfoEntity } from '../user-fact-info/user-fact-info.entity';
 export declare class UserEntity extends Model {
     id: number;
     profileId: string;
@@ -29,4 +30,5 @@ export declare class UserEntity extends Model {
     cards: CardEntity;
     ailments: AilmentEntity[];
     settings: SettingEntity[];
+    factInfo: UserFactInfoEntity;
 }
