@@ -11,7 +11,8 @@ export declare class ProductEntity extends Model {
     supplyId: number;
     name: string;
     description: string;
-    presentation: number;
+    presentation: string;
+    piecesPerBox: number;
     price: number;
     productType: number;
     createdAt: Date;

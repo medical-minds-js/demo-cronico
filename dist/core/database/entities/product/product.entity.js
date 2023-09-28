@@ -56,10 +56,17 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.Column)({
         field: 'PRESENTATION',
+        type: sequelize_typescript_1.DataType.STRING,
+    }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "presentation", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        field: 'PIECES_PER_BOX',
         type: sequelize_typescript_1.DataType.INTEGER,
     }),
     __metadata("design:type", Number)
-], ProductEntity.prototype, "presentation", void 0);
+], ProductEntity.prototype, "piecesPerBox", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         field: 'PRICE',
