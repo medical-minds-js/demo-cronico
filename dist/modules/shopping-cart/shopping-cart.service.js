@@ -121,6 +121,7 @@ let ShoppingCartService = class ShoppingCartService {
             state: address.state,
             comments: address.comments,
             reference: address.reference,
+            deliveryDate: new Date(),
             rangeTimes: rangeTimes,
             visits: 0,
             user: user.get({ plain: true }),
@@ -130,6 +131,7 @@ let ShoppingCartService = class ShoppingCartService {
                 return Object.assign(Object.assign({}, data), { id: null, statusId: 1, price: data.product.price });
             }),
         };
+        order.deliveryDate.setDate(order.deliveryDate.getDate() + 2);
         let orderCreated;
         try {
             orderCreated = await this.shoppingService.createOrder(confirmOrder, order, subscriptions);
