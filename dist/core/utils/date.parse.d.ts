@@ -1,0 +1,10 @@
+export declare function dateToQuery(date: Date): string;
+export declare function dateToRead(date: Date): string;
+export declare function rangeDateToQuery(dates: Date[]): string;
+export declare function dateToTimestamp(date: Date): number;
+export declare function timestampToDate(timestamp: number): Date;
+export declare function querydateToDate(stringDate: string): Date | null;
+export declare function readdateToDate(stringDate: string): Date;
+export declare function secondsToHours(seconds: number): number;
+export declare function makeRangeDate(startDate: Date, endDate: Date): Date[];
+export declare function filterSundaysInRageDates(range: Date[]): Date[];

@@ -24,6 +24,10 @@ let AuthController = class AuthController {
         const data = await this.authService.register(params);
         return data;
     }
+    async testMail() {
+        const data = await this.authService.testEmail();
+        return data;
+    }
 };
 __decorate([
     (0, common_1.Inject)(auth_service_1.AuthService),
@@ -43,6 +47,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "saveUser", null);
+__decorate([
+    (0, common_1.Get)('/testMail'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "testMail", null);
 AuthController = __decorate([
     (0, common_1.Controller)('api/v1/auth')
 ], AuthController);

@@ -43,6 +43,129 @@ let AuthService = class AuthService {
         const token = await this.jwtService.sign(payload);
         return { access_token: token };
     }
+    async testEmail() {
+        const newOrder = {
+            id: 70,
+            userId: 1,
+            subscriptionStatusId: 3,
+            name: 'LINAGLIPTINA',
+            period: 30,
+            subtotal: 160,
+            discount: 0,
+            total: 160,
+            createdAt: '2023-10-10T17:17:02.000Z',
+            nextDelivery: '2023-11-09',
+            subscriptionStatus: {
+                id: 3,
+                name: 'Entrega pendiente',
+            },
+            items: [
+                {
+                    id: 81,
+                    subscriptionId: 70,
+                    statusId: 1,
+                    productId: 9,
+                    saleId: null,
+                    period: 30,
+                    dose: 2,
+                    pieces: 2,
+                    price: 80,
+                    subtotal: 160,
+                    discount: 0,
+                    total: 160,
+                    createdAt: '2023-10-10T17:17:02.000Z',
+                    takeDose: null,
+                    initialTake: null,
+                    intakePeriod: null,
+                    firstTake: null,
+                    status: {
+                        id: 1,
+                        name: 'En proceso',
+                    },
+                    product: {
+                        id: 9,
+                        supplyId: 9,
+                        name: 'LINAGLIPTINA',
+                        description: 'LINAGLIPTINA. TABLETA. CADA TABLETA CONTIENE: LINAGLIPTINA 5 MG. ENVASE CON 30 TABLETAS.',
+                        presentation: 30,
+                        piecesPerBox: 30,
+                        price: 80,
+                        productType: 1,
+                        createdAt: '2023-09-18T09:09:08.000Z',
+                        images: [
+                            {
+                                id: 11,
+                                productId: 9,
+                                url: 'uploads/images/producto_2.png',
+                            },
+                        ],
+                    },
+                },
+            ],
+            orders: [
+                {
+                    id: 58,
+                    orderStatusId: 1,
+                    userId: 1,
+                    cardId: 6,
+                    name: 'LINAGLIPTINA',
+                    total: 160,
+                    street: 'Venustiano carranza',
+                    streetNumber: '100',
+                    suburb: 'LOMAS DE CHAPULTEPEC I SECCION',
+                    cp: 11000,
+                    location: 'Miguel Hidalgo',
+                    state: 'Ciudad de México',
+                    comments: 'Llamar en cuanto esté en la puerta, porque no se escucha cuando tocan.',
+                    reference: 'Fachada amarilla con portón negro. Frente a lavandería La burbuja.',
+                    startTime: null,
+                    endTime: null,
+                    rangeTimes: '08:00:00-11:59:59',
+                    deliveryDate: '2023-10-12T17:17:02.000Z',
+                    whoReceives: null,
+                    relationShip: null,
+                    visits: 0,
+                    paymentId: 'trqjfoxbyweenll4snfp',
+                    paymentCode: null,
+                    createdAt: '2023-10-10T17:17:02.000Z',
+                    orderStatus: {
+                        id: 1,
+                        name: 'Procesado',
+                    },
+                    card: null,
+                    orderProducts: [
+                        {
+                            id: 79,
+                            productId: 9,
+                            orderId: 58,
+                            subscriptionId: null,
+                            saleId: null,
+                            statusId: 1,
+                            loteId: null,
+                            batchCode: null,
+                            expirationDate: null,
+                            pieces: 2,
+                            price: 80,
+                            subtotal: 160,
+                            discount: 0,
+                            total: 160,
+                            createdAt: '2023-10-10T17:17:02.000Z',
+                            status: {
+                                id: 1,
+                                name: 'Procesando',
+                            },
+                        },
+                    ],
+                },
+            ],
+            user: {
+                email: 'lgalindov97@gmail.com',
+                name: 'test',
+            },
+        };
+        this.sendEmailService.sendConfirmOrderMail(newOrder);
+        return newOrder;
+    }
 };
 __decorate([
     (0, common_1.Inject)(users_service_1.UsersService),

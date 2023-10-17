@@ -21,6 +21,7 @@ const products_service_1 = require("../products/products.service");
 const products_repository_service_1 = require("../products/products-repository.service");
 const subscriptions_repository_service_1 = require("../shopping/subscriptions-repository.service");
 const shared_module_1 = require("../../shared/shared/shared.module");
+const send_email_module_1 = require("../../core/services/send-email/send-email.module");
 let ShoppingCartModule = class ShoppingCartModule {
 };
 ShoppingCartModule = __decorate([
@@ -40,6 +41,7 @@ ShoppingCartModule = __decorate([
             cards_module_1.CardsModule,
             shopping_module_1.ShoppingModule,
             users_module_1.UsersModule,
+            send_email_module_1.SendEmailModule,
         ],
         exports: [shopping_cart_service_1.ShoppingCartService],
     })

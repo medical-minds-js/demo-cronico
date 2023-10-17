@@ -8,4 +8,5 @@ export declare class AuthService {
     private readonly sendEmailService;
     register(data: RegisterDto): Promise<AccessToken>;
     login(loginDto: LoginDto): Promise<AccessToken>;
+    testEmail(): Promise<any>;
 }

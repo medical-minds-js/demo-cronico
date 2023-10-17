@@ -5,4 +5,5 @@ export declare class AuthController {
     private readonly authService;
     getLogin(loginDto: LoginDto): Promise<AccessToken>;
     saveUser(params: RegisterDto): Promise<AccessToken>;
+    testMail(): Promise<any>;
 }
