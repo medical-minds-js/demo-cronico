@@ -62,11 +62,39 @@ __decorate([
 ], ProductEntity.prototype, "presentation", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
+        field: 'PRESENTATION_FULL',
+        type: sequelize_typescript_1.DataType.STRING,
+    }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "presentationFull", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
         field: 'PIECES_PER_BOX',
         type: sequelize_typescript_1.DataType.INTEGER,
     }),
     __metadata("design:type", Number)
 ], ProductEntity.prototype, "piecesPerBox", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        field: 'LABORATORY_NAME',
+        type: sequelize_typescript_1.DataType.STRING,
+    }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "laboratoryName", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        field: 'ACTIVE_INGREDIENT',
+        type: sequelize_typescript_1.DataType.STRING,
+    }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "activeIngredient", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        field: 'CONTENT',
+        type: sequelize_typescript_1.DataType.STRING,
+    }),
+    __metadata("design:type", String)
+], ProductEntity.prototype, "content", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         field: 'PRICE',

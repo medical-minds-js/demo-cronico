@@ -12,7 +12,11 @@ export declare class ProductEntity extends Model {
     name: string;
     description: string;
     presentation: string;
+    presentationFull: string;
     piecesPerBox: number;
+    laboratoryName: string;
+    activeIngredient: string;
+    content: string;
     price: number;
     productType: number;
     createdAt: Date;

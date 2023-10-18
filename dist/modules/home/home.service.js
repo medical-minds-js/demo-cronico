@@ -17,7 +17,7 @@ let HomeService = class HomeService {
         return {
             name: 'video',
             description: 'Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris.',
-            path: '/downloads/videos/WMS_Warehouse-Management-System.mp4',
+            path: '/assets/videos/VID-MediTrust-Intro.mp4',
         };
     }
     async getAboutUs() {
