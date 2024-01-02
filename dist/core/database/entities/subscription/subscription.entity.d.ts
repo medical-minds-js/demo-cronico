@@ -18,4 +18,5 @@ export declare class SubscriptionEntity extends Model {
     subscriptionStatus: SubscriptionStatusEntity;
     products: SubscriptionProductEntity[];
     orders: OrderEntity[];
+    items: SubscriptionProductEntity[];
 }

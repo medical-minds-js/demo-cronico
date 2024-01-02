@@ -24,8 +24,8 @@ exports.PostalCodesService = void 0;
 const common_1 = require("@nestjs/common");
 const postal_codes_repository_service_1 = require("./postal-codes-repository.service");
 let PostalCodesService = class PostalCodesService {
-    async getAll(code) {
-        const data = await this.pcRepository.listAll(code);
+    async getAll(code, codeType) {
+        const data = await this.pcRepository.listAll(code, +codeType);
         return data.map((item) => {
             const rest = __rest(item.get({ plain: true }), []);
             return rest;

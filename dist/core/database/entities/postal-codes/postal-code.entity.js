@@ -48,6 +48,14 @@ __decorate([
     __metadata("design:type", String)
 ], PostalCodeEntity.prototype, "city", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'IS_AVAILABLE_FACTINFO', type: sequelize_typescript_1.DataType.INTEGER }),
+    __metadata("design:type", Number)
+], PostalCodeEntity.prototype, "isAvailableFactInfo", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'IS_AVAILABLE_ADDRESS', type: sequelize_typescript_1.DataType.INTEGER }),
+    __metadata("design:type", Number)
+], PostalCodeEntity.prototype, "isAVailableAddress", void 0);
+__decorate([
     (0, sequelize_typescript_1.Column)({ field: 'IS_ACTIVE', type: sequelize_typescript_1.DataType.INTEGER }),
     __metadata("design:type", Number)
 ], PostalCodeEntity.prototype, "isActive", void 0);

@@ -41,6 +41,12 @@ let UsersRepositoryService = class UsersRepositoryService {
     async findOneById(id) {
         return await this.userRepository.findOne({ where: { id } });
     }
+    async findUsersByIds(ids) {
+        const data = await this.userRepository.findAll({
+            where: { id: { [sequelize_1.Op.in]: ids } },
+        });
+        return data.map((i) => i.get({ plain: true }));
+    }
     async findLogin(loginDto) {
         return await this.userRepository.findOne({
             where: { email: loginDto.email, pass: loginDto.pass },
@@ -66,6 +72,7 @@ let UsersRepositoryService = class UsersRepositoryService {
             cellPhone: data.cellPhone,
             gender: data.gender,
             statusInfo: data.statusInfo,
+            haveComment: data.haveComment,
         }, {
             where: { id: [data.id] },
         });
@@ -192,8 +199,14 @@ let UsersRepositoryService = class UsersRepositoryService {
             userId: value.userId,
             name: value.name,
             fiscalName: value.fiscalName,
-            fiscalAddress: value.fiscalAddress,
-            fiscalNumber: value.fiscalNumber,
+            rfc: value.rfc,
+            cp: value.cp,
+            state: value.state,
+            location: value.location,
+            street: value.street,
+            suburb: value.suburb,
+            streetNumber: value.streetNumber,
+            interiorNumber: value.interiorNumber,
         }, { where: { id } });
     }
     async getFactInfoByUserId(userId) {

@@ -14,11 +14,12 @@ const products_module_1 = require("../products/products.module");
 const shared_module_1 = require("../../shared/shared/shared.module");
 const supply_request_entity_providers_1 = require("../../core/database/entities/supply-requests/supply-request-entity.providers");
 const home_reposiory_service_1 = require("./home-reposiory.service");
+const comments_module_1 = require("../comments/comments.module");
 let HomeModule = class HomeModule {
 };
 HomeModule = __decorate([
     (0, common_1.Module)({
-        imports: [products_module_1.ProductsModule, shared_module_1.SharedModule],
+        imports: [products_module_1.ProductsModule, shared_module_1.SharedModule, comments_module_1.CommentsModule],
         controllers: [home_controller_1.HomeController],
         providers: [
             home_service_1.HomeService,

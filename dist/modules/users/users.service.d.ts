@@ -13,6 +13,7 @@ export declare class UsersService {
     private readonly openPayService;
     private readonly ailmentsService;
     findAll(): Promise<User[]>;
+    findUsersByIds(ids: number[]): Promise<UserEntity[]>;
     findOneById(id: number): Promise<User>;
     getById(id: number): Promise<UserEntity>;
     findUserByEmail(email: string): Promise<UserEntity>;

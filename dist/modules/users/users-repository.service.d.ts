@@ -17,6 +17,7 @@ export declare class UsersRepositoryService {
     constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity, userSettingRepository: typeof UserSettingEntity, userFactInfoRepository: typeof UserFactInfoEntity);
     findAll(): Promise<UserEntity[]>;
     findOneById(id: number): Promise<UserEntity>;
+    findUsersByIds(ids: number[]): Promise<UserEntity[]>;
     findLogin(loginDto: LoginDto): Promise<UserEntity>;
     findUserByEmail(email: string): Promise<UserEntity>;
     save(data: UserEntity): Promise<UserEntity>;

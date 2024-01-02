@@ -31,6 +31,7 @@ const postal_codes_module_1 = require("./modules/postal-codes/postal-codes.modul
 const ailments_controller_1 = require("./modules/ailments/ailments.controller");
 const ailments_module_1 = require("./modules/ailments/ailments.module");
 const send_email_module_1 = require("./core/services/send-email/send-email.module");
+const comments_module_1 = require("./modules/comments/comments.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -68,6 +69,7 @@ AppModule = __decorate([
             postal_codes_module_1.PostalCodesModule,
             ailments_module_1.AilmentsModule,
             send_email_module_1.SendEmailModule,
+            comments_module_1.CommentsModule,
         ],
         controllers: [app_controller_1.AppController, ailments_controller_1.AilmentsController],
         providers: [app_service_1.AppService, password_strategy_service_1.PasswordStrategyService],

@@ -19,6 +19,7 @@ export declare class UserEntity extends Model {
     cellPhone: string;
     gender: number;
     statusInfo: number;
+    haveComment: number;
     pass: string;
     salt: string;
     enableOpenPay: string;

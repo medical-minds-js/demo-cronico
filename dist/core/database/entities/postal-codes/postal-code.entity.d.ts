@@ -8,5 +8,7 @@ export declare class PostalCodeEntity extends Model {
     state: string;
     keyState: number;
     city: string;
+    isAvailableFactInfo: number;
+    isAVailableAddress: number;
     isActive: number;
 }

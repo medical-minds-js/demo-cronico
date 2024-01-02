@@ -19,7 +19,7 @@ const postal_codes_service_1 = require("./postal-codes.service");
 const success_list_response_1 = require("../../core/clases/success-list.response");
 let PostalCodesController = class PostalCodesController {
     async getActivePostalCodes(params) {
-        const data = await this.cpService.getAll(params.code);
+        const data = await this.cpService.getAll(params.code, params.codeType);
         if (data.length > 0) {
             return new success_list_response_1.SuccessListResponse(data);
         }
@@ -31,7 +31,7 @@ __decorate([
     __metadata("design:type", postal_codes_service_1.PostalCodesService)
 ], PostalCodesController.prototype, "cpService", void 0);
 __decorate([
-    (0, common_1.Get)('list/:code'),
+    (0, common_1.Get)('list/:code/:codeType'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

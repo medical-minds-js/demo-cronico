@@ -55,7 +55,7 @@ let UsersController = class UsersController {
         return new success_response_1.SuccessResponse(data);
     }
     async configUserAilmentsProduct(params, data) {
-        const result = await this.usersService.configUserAilmentsProduct(params.id, data);
+        await this.usersService.configUserAilmentsProduct(params.id, data);
         return new success_response_1.SuccessResponse('Actualizado');
     }
     async createDoseByAilments(req, data) {

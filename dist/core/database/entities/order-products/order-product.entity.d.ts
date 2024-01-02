@@ -1,6 +1,7 @@
 import { Model } from 'sequelize-typescript';
 import { OrderEntity } from '../order/order.entity';
 import { OrderProductStatusEntity } from '../order-product-status/order-product-status.entity';
+import { ProductImageEntity } from '../product-images/product-images.entity';
 export declare class OrderProductEntity extends Model {
     id: number;
     productId: number;
@@ -19,4 +20,5 @@ export declare class OrderProductEntity extends Model {
     createdAt: Date;
     order: OrderEntity;
     status: OrderProductStatusEntity;
+    images: ProductImageEntity[];
 }

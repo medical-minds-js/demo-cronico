@@ -107,6 +107,7 @@ let ShoppingService = class ShoppingService {
         const subcriptionProducts = await this.subscriptionsService.findSubscriptionProductByIds(subscriptions.map((i) => i.id));
         const orders = await this.orderRepository.getOrderBySubscriptionIds(subscriptions.map((item) => item.id));
         const orderProducts = await this.orderRepository.getProductsByOrders(orders.map((item) => item.id));
+        const products = await this.productsService.viewProductByIds(orderProducts.map((orderProduct) => orderProduct.productId));
         const images = await this.productsService.viewImagesByIds(subcriptionProducts.map((item) => item.productId));
         let card = null;
         if (id) {
@@ -114,7 +115,7 @@ let ShoppingService = class ShoppingService {
             card = await this.getOrderCard(tempOrder[0].userId, tempOrder[0].id);
         }
         const items = subscriptions.map((item) => {
-            const items = subcriptionProducts
+            const subProducts = subcriptionProducts
                 .filter((element) => element.subscriptionId === item.id)
                 .map((element) => {
                 const data = element.get({ plain: true });
@@ -127,9 +128,14 @@ let ShoppingService = class ShoppingService {
                 const _a = order.get({ plain: true }), { subscriptions } = _a, rest = __rest(_a, ["subscriptions"]);
                 return Object.assign(Object.assign({}, rest), { card, orderProducts: orderProducts
                         .map((i) => i.get({ plain: true }))
-                        .filter((i) => i.orderId === order.id) });
+                        .filter((i) => {
+                        if (i.orderId === order.id) {
+                            i.images = products.find((prod) => prod.id === i.productId).images;
+                            return i;
+                        }
+                    }) });
             });
-            return Object.assign(Object.assign({}, item.get({ plain: true })), { items, orders: foundOrders });
+            return Object.assign(Object.assign({}, item.get({ plain: true })), { items: subProducts, orders: foundOrders });
         });
         return { items, total };
     }

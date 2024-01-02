@@ -73,6 +73,10 @@ __decorate([
     __metadata("design:type", Number)
 ], UserEntity.prototype, "statusInfo", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'HAVE_COMMENT', type: sequelize_typescript_1.DataType.INTEGER({ length: 1 }) }),
+    __metadata("design:type", Number)
+], UserEntity.prototype, "haveComment", void 0);
+__decorate([
     (0, sequelize_typescript_1.Column)({ field: 'PASS', type: sequelize_typescript_1.DataType.STRING(200) }),
     __metadata("design:type", String)
 ], UserEntity.prototype, "pass", void 0);

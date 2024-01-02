@@ -2,5 +2,5 @@ import { PostalCodeEntity } from 'src/core/database/entities/postal-codes/postal
 export declare class PostalCodesRepositoryService {
     private readonly postalCodeRepository;
     constructor(postalCodeRepository: typeof PostalCodeEntity);
-    listAll(code: number): Promise<PostalCodeEntity[]>;
+    listAll(code: number, codeType: number): Promise<PostalCodeEntity[]>;
 }

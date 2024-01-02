@@ -19,10 +19,27 @@ let PostalCodesRepositoryService = class PostalCodesRepositoryService {
     constructor(postalCodeRepository) {
         this.postalCodeRepository = postalCodeRepository;
     }
-    async listAll(code) {
-        return await this.postalCodeRepository.findAll({
-            where: { isActive: 1, postalCode: code },
-        });
+    async listAll(code, codeType) {
+        if (codeType == 1) {
+            return await this.postalCodeRepository.findAll({
+                where: {
+                    isActive: 1,
+                    postalCode: +code,
+                    isAVailableAddress: 1,
+                    isAvailableFactInfo: 0,
+                },
+            });
+        }
+        else {
+            return await this.postalCodeRepository.findAll({
+                where: {
+                    isActive: 1,
+                    postalCode: +code,
+                    isAvailableFactInfo: 1,
+                    isAVailableAddress: 0,
+                },
+            });
+        }
     }
 };
 PostalCodesRepositoryService = __decorate([

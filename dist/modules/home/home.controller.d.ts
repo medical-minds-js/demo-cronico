@@ -4,6 +4,7 @@ import { SupplyRequestEntity } from 'src/core/database/entities/supply-requests/
 export declare class HomeController {
     private readonly productsService;
     private readonly homeService;
+    private readonly commentsService;
     getMainProduct(): Promise<SuccessResponse>;
     getMainPackage(): Promise<SuccessResponse>;
     getNewProducts(): Promise<SuccessListResponse>;

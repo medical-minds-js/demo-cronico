@@ -4,6 +4,12 @@ export declare class UserFactInfoEntity extends Model {
     userId: number;
     name: string;
     fiscalName: string;
-    fiscalAddress: string;
-    fiscalNumber: string;
+    rfc: string;
+    cp: number;
+    state: string;
+    location: string;
+    street: string;
+    suburb: string;
+    streetNumber: string;
+    interiorNumber: string;
 }

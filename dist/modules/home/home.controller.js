@@ -19,6 +19,7 @@ const success_list_response_1 = require("../../core/clases/success-list.response
 const success_response_1 = require("../../core/clases/success.response");
 const home_service_1 = require("./home.service");
 const supply_request_entity_1 = require("../../core/database/entities/supply-requests/supply-request.entity");
+const comments_service_1 = require("../comments/comments.service");
 let HomeController = class HomeController {
     async getMainProduct() {
         const data = await this.productsService.getHomePrincipalProduct();
@@ -49,7 +50,7 @@ let HomeController = class HomeController {
         return new success_response_1.SuccessResponse(data);
     }
     async getTestimonials() {
-        const data = await this.homeService.getTestimonials();
+        const data = await this.commentsService.getAllComments();
         return new success_list_response_1.SuccessListResponse(data);
     }
     async createRequestSupply(data) {
@@ -65,6 +66,10 @@ __decorate([
     (0, common_1.Inject)(home_service_1.HomeService),
     __metadata("design:type", home_service_1.HomeService)
 ], HomeController.prototype, "homeService", void 0);
+__decorate([
+    (0, common_1.Inject)(comments_service_1.CommentsService),
+    __metadata("design:type", comments_service_1.CommentsService)
+], HomeController.prototype, "commentsService", void 0);
 __decorate([
     (0, common_1.Get)('main-product'),
     __metadata("design:type", Function),

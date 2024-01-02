@@ -14,6 +14,7 @@ export interface User {
     cellPhone: string;
     gender: number;
     statusInfo: number;
+    haveTestimony: number;
     picture: string;
     enableOpenPay: string;
 }

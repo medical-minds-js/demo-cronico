@@ -18,6 +18,7 @@ function UserMapper(user) {
         cellPhone: user.cellPhone,
         gender: user.gender,
         statusInfo: user.statusInfo,
+        haveTestimony: user.haveComment,
     };
 }
 exports.UserMapper = UserMapper;

@@ -34,6 +34,9 @@ let UsersService = class UsersService {
             return (0, user_utils_1.UserMapper)(item.get({ plain: true }));
         });
     }
+    async findUsersByIds(ids) {
+        return await this.userRepository.findUsersByIds(ids);
+    }
     async findOneById(id) {
         const data = await this.userRepository.findOneById(id);
         return (0, user_utils_1.UserMapper)(data.get({ plain: true }));

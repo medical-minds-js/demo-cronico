@@ -34,13 +34,37 @@ __decorate([
     __metadata("design:type", String)
 ], UserFactInfoEntity.prototype, "fiscalName", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'FISCAL_ADDRESS', type: sequelize_typescript_1.DataType.STRING }),
+    (0, sequelize_typescript_1.Column)({ field: 'RFC', type: sequelize_typescript_1.DataType.STRING }),
     __metadata("design:type", String)
-], UserFactInfoEntity.prototype, "fiscalAddress", void 0);
+], UserFactInfoEntity.prototype, "rfc", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({ field: 'FISCAL_NUMBER', type: sequelize_typescript_1.DataType.STRING }),
+    (0, sequelize_typescript_1.Column)({ field: 'CP', type: sequelize_typescript_1.DataType.INTEGER }),
+    __metadata("design:type", Number)
+], UserFactInfoEntity.prototype, "cp", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'STATE', type: sequelize_typescript_1.DataType.STRING }),
     __metadata("design:type", String)
-], UserFactInfoEntity.prototype, "fiscalNumber", void 0);
+], UserFactInfoEntity.prototype, "state", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'LOCATION', type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], UserFactInfoEntity.prototype, "location", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'STREET', type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], UserFactInfoEntity.prototype, "street", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'SUBURB', type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], UserFactInfoEntity.prototype, "suburb", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'STREET_NUMBER', type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], UserFactInfoEntity.prototype, "streetNumber", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'INTERIOR_NUMBER', type: sequelize_typescript_1.DataType.STRING }),
+    __metadata("design:type", String)
+], UserFactInfoEntity.prototype, "interiorNumber", void 0);
 UserFactInfoEntity = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'app_t_215_user_fact_info',
