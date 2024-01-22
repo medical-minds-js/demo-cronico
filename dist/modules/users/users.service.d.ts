@@ -4,7 +4,7 @@ import { AilmentEntity } from 'src/core/database/entities/ailments/ailment.entit
 import { UserAilmentsEntity } from 'src/core/database/entities/user-ailments/user-ailments.entity';
 import { AilmentsFilters } from '../ailments/interfaces/ailments-filters';
 import { DoseTakenEntity } from 'src/core/database/entities/doses_taken/dose-taken.entity';
-import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
+import { UserAilmentsProductEntity } from 'src/core/database/entities/user-fact-info/user-ailments-product/user-ailments-product.entity';
 import { AilmentAdd } from './interfaces/ailmentAdd.interface';
 import { UserSettingEntity } from 'src/core/database/entities/user-setting/user-setting.entity';
 import { UserFactInfoEntity } from 'src/core/database/entities/user-fact-info/user-fact-info.entity';
@@ -12,6 +12,7 @@ export declare class UsersService {
     private readonly userRepository;
     private readonly openPayService;
     private readonly ailmentsService;
+    private readonly membershipsService;
     findAll(): Promise<User[]>;
     findUsersByIds(ids: number[]): Promise<UserEntity[]>;
     findOneById(id: number): Promise<User>;
@@ -37,4 +38,8 @@ export declare class UsersService {
     getFactInfo(id: number): Promise<UserFactInfoEntity>;
     saveFactInfo(data: UserFactInfoEntity): Promise<UserFactInfoEntity>;
     updateFactInfo(id: number, data: UserFactInfoEntity): Promise<UserFactInfoEntity>;
+    getCurrentMemberships(userId: number): Promise<any>;
+    getMemberships(userId: number): Promise<any[]>;
+    saveMemberships(userId: number, membershipsId: number): Promise<import("../../core/database/entities/memberships-users/memberships-users-entity").MembershipsUsersEntity>;
+    getWinFreeMemberships(userId: number): Promise<number>;
 }

@@ -2,7 +2,7 @@
 import { SuccessListResponse } from 'src/core/clases/success-list.response';
 import { SuccessResponse } from 'src/core/clases/success.response';
 import { AilmentsFilters } from '../ailments/interfaces/ailments-filters';
-import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
+import { UserAilmentsProductEntity } from 'src/core/database/entities/user-fact-info/user-ailments-product/user-ailments-product.entity';
 import { AilmentAdd } from './interfaces/ailmentAdd.interface';
 export declare class UsersController {
     private readonly usersService;
@@ -23,4 +23,9 @@ export declare class UsersController {
     getUserFactInfo(req: any): Promise<SuccessResponse>;
     saveFactInfo(req: any, data: any): Promise<SuccessResponse>;
     updateFactInfo(req: any, data: any): Promise<SuccessResponse>;
+    getCurrentMemberships(req: any): Promise<SuccessResponse>;
+    getMemberships(req: any): Promise<SuccessListResponse>;
+    startTestMemberships(req: any, data: any): Promise<SuccessResponse>;
+    saveMemberships(req: any, data: any): Promise<SuccessResponse>;
+    getWinFreeMemberships(req: any): Promise<SuccessListResponse>;
 }

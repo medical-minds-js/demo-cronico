@@ -93,6 +93,10 @@ __decorate([
     __metadata("design:type", String)
 ], UserEntity.prototype, "openPayId", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'WIN_MEMBERSHIPS', type: sequelize_typescript_1.DataType.INTEGER({ length: 1 }) }),
+    __metadata("design:type", Number)
+], UserEntity.prototype, "winMemberships", void 0);
+__decorate([
     sequelize_typescript_1.CreatedAt,
     (0, sequelize_typescript_1.Column)({ field: 'CREATED_AT' }),
     __metadata("design:type", Date)

@@ -27,6 +27,7 @@ const user_utils_1 = require("./user.utils");
 const open_pay_service_1 = require("../../core/services/open-pay/open-pay.service");
 const ailments_service_1 = require("../ailments/ailments.service");
 const fail_response_1 = require("../../core/clases/fail.response");
+const memberships_service_1 = require("../memberships/memberships.service");
 let UsersService = class UsersService {
     async findAll() {
         const items = await this.userRepository.findAll();
@@ -49,6 +50,12 @@ let UsersService = class UsersService {
     }
     async saveRegister(user) {
         const data = await this.userRepository.save(user);
+        const memberships = await this.membershipsService.getById(2);
+        if (memberships.totals > memberships.delivered) {
+            await this.saveMemberships(data.id, 2);
+            await this.membershipsService.increseDelievered(2);
+            await this.userRepository.turnOnWinMemberships(data.id);
+        }
         return (0, user_utils_1.UserMapper)(data.get({ plain: true }));
     }
     async updateRegister(user) {
@@ -169,6 +176,42 @@ let UsersService = class UsersService {
         await this.userRepository.updateFactInfo(id, data);
         return this.getFactInfo(data.userId);
     }
+    async getCurrentMemberships(userId) {
+        const data = await this.userRepository.getCurrentMemberships(userId);
+        if (data) {
+            const items = await this.membershipsService.getMembershipsByIds([
+                data.membershipsId,
+            ]);
+            return Object.assign(Object.assign({}, data), { memberships: items[0] });
+        }
+        return null;
+    }
+    async getMemberships(userId) {
+        const items = await this.userRepository.getMembershipsByUser(userId);
+        const members = await this.membershipsService.getMembershipsByIds(items.map((i) => i.membershipsId));
+        return items.map((item) => {
+            const found = members.find((i) => i.id === item.membershipsId);
+            return Object.assign(Object.assign({}, item), { memberships: found });
+        });
+    }
+    async saveMemberships(userId, membershipsId) {
+        const memberships = await this.membershipsService.getById(membershipsId);
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + memberships.days);
+        return this.userRepository.saveMemberships(userId, membershipsId, expirationDate);
+    }
+    async getWinFreeMemberships(userId) {
+        let winMemberships = 0;
+        const memberships = await this.userRepository.getCurrentMemberships(userId);
+        if (memberships && memberships.membershipsId === 2) {
+            const user = await this.userRepository.findOneById(userId);
+            if (user.winMemberships) {
+                winMemberships = 1;
+                await this.userRepository.turnOffWinMemberships(userId);
+            }
+        }
+        return winMemberships;
+    }
 };
 __decorate([
     (0, common_1.Inject)(users_repository_service_1.UsersRepositoryService),
@@ -182,6 +225,10 @@ __decorate([
     (0, common_1.Inject)(ailments_service_1.AilmentsService),
     __metadata("design:type", ailments_service_1.AilmentsService)
 ], UsersService.prototype, "ailmentsService", void 0);
+__decorate([
+    (0, common_1.Inject)(memberships_service_1.MembershipsService),
+    __metadata("design:type", memberships_service_1.MembershipsService)
+], UsersService.prototype, "membershipsService", void 0);
 UsersService = __decorate([
     (0, common_1.Injectable)()
 ], UsersService);

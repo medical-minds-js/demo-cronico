@@ -20,6 +20,10 @@ const ailments_service_1 = require("../ailments/ailments.service");
 const ailments_repository_service_1 = require("../ailments/ailments-repository.service");
 const user_setting_entity_1 = require("../../core/database/entities/user-setting/user-setting.entity");
 const user_fact_info_entity_1 = require("../../core/database/entities/user-fact-info/user-fact-info.entity");
+const memberships_users_entity_1 = require("../../core/database/entities/memberships-users/memberships-users-entity");
+const memberships_entity_1 = require("../../core/database/entities/memberships/memberships-entity");
+const memberships_service_1 = require("../memberships/memberships.service");
+const memberships_repository_service_1 = require("../memberships/memberships-repository.service");
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
@@ -34,6 +38,10 @@ UsersModule = __decorate([
             ailments_repository_service_1.AilmentsRepositoryService,
             user_setting_entity_1.UserSettingEntity,
             user_fact_info_entity_1.UserFactInfoEntity,
+            memberships_service_1.MembershipsService,
+            memberships_repository_service_1.MembershipsRepositoryService,
+            memberships_entity_1.MembershipsEntity,
+            memberships_users_entity_1.MembershipsUsersEntity,
         ],
         imports: [shared_module_1.SharedModule, jwt_1.JwtModule.register(constansts_1.jwtOptions)],
         exports: [users_service_1.UsersService],

@@ -5,7 +5,7 @@ import { SupplyEntity } from '../supplies/supply.entity';
 import { ProductPartEntity } from '../product-parts/product-parts.entity';
 import { ProductImageEntity } from '../product-images/product-images.entity';
 import { ShoppingCartEntity } from '../shopping-carts/shopping-cart.entity';
-import { UserAilmentsProductEntity } from '../user-ailments-product/user-ailments-product.entity';
+import { UserAilmentsProductEntity } from '../user-fact-info/user-ailments-product/user-ailments-product.entity';
 export declare class ProductEntity extends Model {
     id: number;
     supplyId: number;

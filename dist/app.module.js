@@ -32,6 +32,8 @@ const ailments_controller_1 = require("./modules/ailments/ailments.controller");
 const ailments_module_1 = require("./modules/ailments/ailments.module");
 const send_email_module_1 = require("./core/services/send-email/send-email.module");
 const comments_module_1 = require("./modules/comments/comments.module");
+const memberships_module_1 = require("./modules/memberships/memberships.module");
+const memberships_repository_service_1 = require("./modules/memberships/memberships-repository.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -70,9 +72,14 @@ AppModule = __decorate([
             ailments_module_1.AilmentsModule,
             send_email_module_1.SendEmailModule,
             comments_module_1.CommentsModule,
+            memberships_module_1.MembershipsModule,
         ],
         controllers: [app_controller_1.AppController, ailments_controller_1.AilmentsController],
-        providers: [app_service_1.AppService, password_strategy_service_1.PasswordStrategyService],
+        providers: [
+            app_service_1.AppService,
+            password_strategy_service_1.PasswordStrategyService,
+            memberships_repository_service_1.MembershipsRepositoryService,
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;

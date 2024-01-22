@@ -19,12 +19,12 @@ const profile_entity_1 = require("../../core/database/entities/profile/profile.e
 const ailment_images_entity_1 = require("../../core/database/entities/ailments-images/ailment-images.entity");
 const ailment_entity_1 = require("../../core/database/entities/ailments/ailment.entity");
 const sequelize_1 = require("sequelize");
-const user_ailments_product_entity_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product.entity");
+const user_ailments_product_entity_1 = require("../../core/database/entities/user-fact-info/user-ailments-product/user-ailments-product.entity");
 const product_entity_1 = require("../../core/database/entities/product/product.entity");
 const setting_entity_1 = require("../../core/database/entities/settings/setting.entity");
 const product_images_entity_1 = require("../../core/database/entities/product-images/product-images.entity");
 let UsersRepositoryService = class UsersRepositoryService {
-    constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository, userSettingRepository, userFactInfoRepository) {
+    constructor(userRepository, ailmentsRepository, userAilmentsRepository, userAilmentsProductsRepository, doseTakenRepository, userSettingRepository, userFactInfoRepository, membershipsUsersEntity) {
         this.userRepository = userRepository;
         this.ailmentsRepository = ailmentsRepository;
         this.userAilmentsRepository = userAilmentsRepository;
@@ -32,6 +32,7 @@ let UsersRepositoryService = class UsersRepositoryService {
         this.doseTakenRepository = doseTakenRepository;
         this.userSettingRepository = userSettingRepository;
         this.userFactInfoRepository = userFactInfoRepository;
+        this.membershipsUsersEntity = membershipsUsersEntity;
     }
     async findAll() {
         return await this.userRepository.findAll({
@@ -212,6 +213,33 @@ let UsersRepositoryService = class UsersRepositoryService {
     async getFactInfoByUserId(userId) {
         return this.userFactInfoRepository.findOne({ where: { userId: userId } });
     }
+    async getCurrentMemberships(userId) {
+        const data = await this.membershipsUsersEntity.findOne({
+            where: { userId: userId, status: 1 },
+        });
+        return data ? data.get({ plain: true }) : null;
+    }
+    async getMembershipsByUser(userId) {
+        const items = await this.membershipsUsersEntity.findAll({
+            where: { userId: userId },
+        });
+        return items.map((i) => i.get({ plain: true }));
+    }
+    async saveMemberships(userId, membershipsId, expirationDate) {
+        return this.membershipsUsersEntity.create({
+            userId,
+            membershipsId,
+            createdAt: new Date(),
+            status: 1,
+            expirationDate,
+        });
+    }
+    turnOnWinMemberships(id) {
+        return this.userRepository.update({ winMemberships: 1 }, { where: { id } });
+    }
+    turnOffWinMemberships(id) {
+        return this.userRepository.update({ winMemberships: 0 }, { where: { id } });
+    }
 };
 UsersRepositoryService = __decorate([
     (0, common_1.Injectable)(),
@@ -222,7 +250,8 @@ UsersRepositoryService = __decorate([
     __param(4, (0, common_1.Inject)(constants_1.DOSES_TAKEN_REPOSITORY)),
     __param(5, (0, common_1.Inject)(constants_1.USER_SETTING_REPOSITORY)),
     __param(6, (0, common_1.Inject)(constants_1.USER_FACT_INFO_REPOSITORY)),
-    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object, Object])
+    __param(7, (0, common_1.Inject)(constants_1.MEMBERSHIPS_USERS_REPOSITORY)),
+    __metadata("design:paramtypes", [Object, Object, Object, Object, Object, Object, Object, Object])
 ], UsersRepositoryService);
 exports.UsersRepositoryService = UsersRepositoryService;
 //# sourceMappingURL=users-repository.service.js.map

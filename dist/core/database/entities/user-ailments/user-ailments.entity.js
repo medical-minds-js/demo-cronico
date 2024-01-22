@@ -13,7 +13,7 @@ exports.UserAilmentsEntity = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 const ailment_entity_1 = require("../ailments/ailment.entity");
 const user_entity_1 = require("../user/user.entity");
-const user_ailments_product_entity_1 = require("../user-ailments-product/user-ailments-product.entity");
+const user_ailments_product_entity_1 = require("../user-fact-info/user-ailments-product/user-ailments-product.entity");
 let UserAilmentsEntity = class UserAilmentsEntity extends sequelize_typescript_1.Model {
 };
 __decorate([

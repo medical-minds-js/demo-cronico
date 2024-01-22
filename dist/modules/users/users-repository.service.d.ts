@@ -3,9 +3,10 @@ import { LoginDto } from '../auth/dto/login.dto.interface';
 import { AilmentEntity } from 'src/core/database/entities/ailments/ailment.entity';
 import { UserAilmentsEntity } from 'src/core/database/entities/user-ailments/user-ailments.entity';
 import { DoseTakenEntity } from 'src/core/database/entities/doses_taken/dose-taken.entity';
-import { UserAilmentsProductEntity } from 'src/core/database/entities/user-ailments-product/user-ailments-product.entity';
+import { UserAilmentsProductEntity } from 'src/core/database/entities/user-fact-info/user-ailments-product/user-ailments-product.entity';
 import { UserSettingEntity } from 'src/core/database/entities/user-setting/user-setting.entity';
 import { UserFactInfoEntity } from 'src/core/database/entities/user-fact-info/user-fact-info.entity';
+import { MembershipsUsersEntity } from 'src/core/database/entities/memberships-users/memberships-users-entity';
 export declare class UsersRepositoryService {
     private readonly userRepository;
     private readonly ailmentsRepository;
@@ -14,7 +15,8 @@ export declare class UsersRepositoryService {
     private readonly doseTakenRepository;
     private readonly userSettingRepository;
     private readonly userFactInfoRepository;
-    constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity, userSettingRepository: typeof UserSettingEntity, userFactInfoRepository: typeof UserFactInfoEntity);
+    private readonly membershipsUsersEntity;
+    constructor(userRepository: typeof UserEntity, ailmentsRepository: typeof AilmentEntity, userAilmentsRepository: typeof UserAilmentsEntity, userAilmentsProductsRepository: typeof UserAilmentsProductEntity, doseTakenRepository: typeof DoseTakenEntity, userSettingRepository: typeof UserSettingEntity, userFactInfoRepository: typeof UserFactInfoEntity, membershipsUsersEntity: typeof MembershipsUsersEntity);
     findAll(): Promise<UserEntity[]>;
     findOneById(id: number): Promise<UserEntity>;
     findUsersByIds(ids: number[]): Promise<UserEntity[]>;
@@ -44,4 +46,9 @@ export declare class UsersRepositoryService {
     createFactInfo(data: UserFactInfoEntity): Promise<UserFactInfoEntity>;
     updateFactInfo(id: number, value: UserFactInfoEntity): Promise<[affectedCount: number]>;
     getFactInfoByUserId(userId: number): Promise<UserFactInfoEntity>;
+    getCurrentMemberships(userId: number): Promise<any>;
+    getMembershipsByUser(userId: number): Promise<any[]>;
+    saveMemberships(userId: number, membershipsId: number, expirationDate: Date): Promise<MembershipsUsersEntity>;
+    turnOnWinMemberships(id: number): Promise<[affectedCount: number]>;
+    turnOffWinMemberships(id: number): Promise<[affectedCount: number]>;
 }

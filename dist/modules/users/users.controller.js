@@ -21,7 +21,7 @@ const auth_guard_1 = require("../auth/guard/auth.guard");
 const platform_express_1 = require("@nestjs/platform-express");
 const multer_1 = require("multer");
 const ailments_service_1 = require("../ailments/ailments.service");
-const user_ailments_product_entity_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product.entity");
+const user_ailments_product_entity_1 = require("../../core/database/entities/user-fact-info/user-ailments-product/user-ailments-product.entity");
 let UsersController = class UsersController {
     async getUser(req) {
         const data = await this.usersService.findOneById(req.user.sub);
@@ -84,6 +84,26 @@ let UsersController = class UsersController {
     }
     async updateFactInfo(req, data) {
         const result = await this.usersService.updateFactInfo(req.user.sub, data);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async getCurrentMemberships(req) {
+        const result = await this.usersService.getCurrentMemberships(req.user.sub);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async getMemberships(req) {
+        const result = await this.usersService.getMemberships(req.user.sub);
+        return new success_list_response_1.SuccessListResponse(result);
+    }
+    async startTestMemberships(req, data) {
+        const result = await this.usersService.saveMemberships(req.user.sub, data.id);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async saveMemberships(req, data) {
+        const result = await this.usersService.saveMemberships(req.user.sub, data.id);
+        return new success_response_1.SuccessResponse(result);
+    }
+    async getWinFreeMemberships(req) {
+        const result = await this.usersService.getWinFreeMemberships(req.user.sub);
         return new success_response_1.SuccessResponse(result);
     }
 };
@@ -222,6 +242,43 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "updateFactInfo", null);
+__decorate([
+    (0, common_1.Get)('/memberships/current'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getCurrentMemberships", null);
+__decorate([
+    (0, common_1.Get)('/memberships'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getMemberships", null);
+__decorate([
+    (0, common_1.Post)('/memberships/test'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "startTestMemberships", null);
+__decorate([
+    (0, common_1.Post)('/memberships'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "saveMemberships", null);
+__decorate([
+    (0, common_1.Get)('/memberships/win-free'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getWinFreeMemberships", null);
 UsersController = __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('api/v1/user')

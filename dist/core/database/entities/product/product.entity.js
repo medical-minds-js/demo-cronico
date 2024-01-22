@@ -18,7 +18,7 @@ const product_parts_entity_1 = require("../product-parts/product-parts.entity");
 const product_images_entity_1 = require("../product-images/product-images.entity");
 const shopping_cart_entity_1 = require("../shopping-carts/shopping-cart.entity");
 const product_ailments_entity_1 = require("../product-ailments/product-ailments.entity");
-const user_ailments_product_entity_1 = require("../user-ailments-product/user-ailments-product.entity");
+const user_ailments_product_entity_1 = require("../user-fact-info/user-ailments-product/user-ailments-product.entity");
 let ProductEntity = class ProductEntity extends sequelize_typescript_1.Model {
     constructor() {
         super(...arguments);

@@ -34,13 +34,15 @@ const supply_request_entity_1 = require("./entities/supply-requests/supply-reque
 const subscription_product_entity_1 = require("./entities/subscription-products/subscription-product.entity");
 const subscription_product_status_entity_1 = require("./entities/subscription-product-status/subscription-product-status.entity");
 const user_ailments_entity_1 = require("./entities/user-ailments/user-ailments.entity");
-const user_ailments_product_entity_1 = require("./entities/user-ailments-product/user-ailments-product.entity");
+const user_ailments_product_entity_1 = require("./entities/user-fact-info/user-ailments-product/user-ailments-product.entity");
 const dose_taken_entity_1 = require("./entities/doses_taken/dose-taken.entity");
 const order_subscription_entity_1 = require("./entities/order-subscription/order-subscription.entity");
 const setting_entity_1 = require("./entities/settings/setting.entity");
 const user_setting_entity_1 = require("./entities/user-setting/user-setting.entity");
 const user_fact_info_entity_1 = require("./entities/user-fact-info/user-fact-info.entity");
 const comments_service_entity_1 = require("./entities/comments-service/comments-service.entity");
+const memberships_entity_1 = require("./entities/memberships/memberships-entity");
+const memberships_users_entity_1 = require("./entities/memberships-users/memberships-users-entity");
 exports.databaseProviders = [
     {
         provide: 'SEQUELIZE',
@@ -78,6 +80,8 @@ exports.databaseProviders = [
                 subscription_entity_1.SubscriptionEntity,
                 subscription_product_status_entity_1.SubscriptionProductStatusEntity,
                 subscription_product_entity_1.SubscriptionProductEntity,
+                memberships_entity_1.MembershipsEntity,
+                memberships_users_entity_1.MembershipsUsersEntity,
                 order_subscription_entity_1.OrderSubscriptionEntity,
                 postal_code_entity_1.PostalCodeEntity,
                 supply_request_entity_1.SupplyRequestEntity,

@@ -32,7 +32,7 @@ __decorate([
 __decorate([
     (0, sequelize_typescript_1.Column)({
         field: 'QUALIFICATION',
-        type: sequelize_typescript_1.DataType.INTEGER({ length: 1, decimals: 1 }),
+        type: sequelize_typescript_1.DataType.DOUBLE({ length: 1, decimals: 1 }),
     }),
     __metadata("design:type", Number)
 ], CommentsServiceEntity.prototype, "qualification", void 0);

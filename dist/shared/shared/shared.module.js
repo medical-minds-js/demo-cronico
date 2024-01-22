@@ -20,7 +20,7 @@ const setting_entity_providers_1 = require("../../core/database/entities/setting
 const shopping_cart_entity_providers_1 = require("../../core/database/entities/shopping-carts/shopping-cart-entity.providers");
 const subscription_product_entity_providers_1 = require("../../core/database/entities/subscription-products/subscription-product-entity.providers");
 const subscription_entity_providers_1 = require("../../core/database/entities/subscription/subscription-entity.providers");
-const user_ailments_product_entity_providers_1 = require("../../core/database/entities/user-ailments-product/user-ailments-product-entity.providers");
+const user_ailments_product_entity_providers_1 = require("../../core/database/entities/user-fact-info/user-ailments-product/user-ailments-product-entity.providers");
 const user_ailments_entity_providers_1 = require("../../core/database/entities/user-ailments/user-ailments-entity.providers");
 const user_fact_info_providers_1 = require("../../core/database/entities/user-fact-info/user-fact-info.providers");
 const user_setting_entity_providers_1 = require("../../core/database/entities/user-setting/user-setting-entity.providers");
@@ -28,6 +28,8 @@ const user_entity_providers_1 = require("../../core/database/entities/user/user-
 const wms_customer_requirement_detail_entity_providers_1 = require("../../core/database/entities/wms-customer-requirement-detail/wms-customer-requirement-detail-entity.providers");
 const wms_customer_requirement_entity_providers_1 = require("../../core/database/entities/wms-customer-requirement/wms-customer-requirement-entity.providers");
 const password_strategy_service_1 = require("../../core/services/password-strategy/password-strategy.service");
+const memberships_users_entity_provider_1 = require("../../core/database/entities/memberships-users/memberships-users-entity.provider");
+const memberships_entity_providers_1 = require("../../core/database/entities/memberships/memberships-entity.providers");
 let SharedModule = class SharedModule {
 };
 SharedModule = __decorate([
@@ -49,6 +51,8 @@ SharedModule = __decorate([
             ...subscription_entity_providers_1.subscriptionEntityProviders,
             ...subscription_product_entity_providers_1.subscriptionProductEntityProviders,
             ...user_ailments_product_entity_providers_1.userAilmentsProductEntityProviders,
+            ...memberships_entity_providers_1.membershipsEntityProviders,
+            ...memberships_users_entity_provider_1.membershipsUsersEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...user_ailments_entity_providers_1.userAilmentsEntityProviders,
             ...user_setting_entity_providers_1.userSettingEntityProviders,
@@ -75,6 +79,8 @@ SharedModule = __decorate([
             ...subscription_entity_providers_1.subscriptionEntityProviders,
             ...subscription_product_entity_providers_1.subscriptionProductEntityProviders,
             ...user_ailments_product_entity_providers_1.userAilmentsProductEntityProviders,
+            ...memberships_entity_providers_1.membershipsEntityProviders,
+            ...memberships_users_entity_provider_1.membershipsUsersEntityProviders,
             ...user_entity_providers_1.userEntityProviders,
             ...user_ailments_entity_providers_1.userAilmentsEntityProviders,
             ...user_setting_entity_providers_1.userSettingEntityProviders,

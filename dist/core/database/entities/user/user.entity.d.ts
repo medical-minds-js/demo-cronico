@@ -24,6 +24,7 @@ export declare class UserEntity extends Model {
     salt: string;
     enableOpenPay: string;
     openPayId: string;
+    winMemberships: number;
     createdAt: Date;
     profile: ProfileEntity;
     address: AddressEntity;

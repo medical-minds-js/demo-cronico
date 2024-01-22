@@ -19,6 +19,8 @@ const open_pay_service_1 = require("../../core/services/open-pay/open-pay.servic
 const ailments_service_1 = require("../ailments/ailments.service");
 const ailments_repository_service_1 = require("../ailments/ailments-repository.service");
 const send_email_module_1 = require("../../core/services/send-email/send-email.module");
+const memberships_repository_service_1 = require("../memberships/memberships-repository.service");
+const memberships_service_1 = require("../memberships/memberships.service");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -31,6 +33,8 @@ AuthModule = __decorate([
             open_pay_service_1.OpenPayService,
             ailments_service_1.AilmentsService,
             ailments_repository_service_1.AilmentsRepositoryService,
+            memberships_service_1.MembershipsService,
+            memberships_repository_service_1.MembershipsRepositoryService,
         ],
         exports: [auth_service_1.AuthService],
         imports: [
