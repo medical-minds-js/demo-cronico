@@ -211,7 +211,7 @@ let UsersService = class UsersService {
     async saveGiftMemberships(userId) {
         const memberships = await this.membershipsService.getGiftMemberships();
         const expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + memberships.freeDays);
+        expirationDate.setDate(expirationDate.getDate() + memberships.days);
         await this.userRepository.disabledMemberships(userId);
         await this.userRepository.saveGiftMemberships(userId, memberships.id, expirationDate);
         await this.membershipsService.increseDelievered(memberships.id);
