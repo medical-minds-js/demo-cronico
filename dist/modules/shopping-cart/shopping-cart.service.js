@@ -29,6 +29,7 @@ const shopping_service_1 = require("../shopping/shopping.service");
 const users_service_1 = require("../users/users.service");
 const products_service_1 = require("../products/products.service");
 const subscriptions_repository_service_1 = require("../shopping/subscriptions-repository.service");
+const memberships_service_1 = require("../memberships/memberships.service");
 let ShoppingCartService = class ShoppingCartService {
     async findByUserId(userId) {
         const data = await this.shoppingCartRepository.findItemsByIdUser(userId);
@@ -45,7 +46,7 @@ let ShoppingCartService = class ShoppingCartService {
             previousProductData.pieces += shoppingCart.pieces;
             previousProductData.subtotal =
                 shoppingCart.pieces * previousProduct.product.price;
-            previousProductData.discount = 0;
+            previousProductData.discount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
             previousProductData.total +=
                 previousProductData.subtotal - previousProductData.discount;
             await this.shoppingCartRepository.update(previousProduct.id, previousProductData);
@@ -54,7 +55,7 @@ let ShoppingCartService = class ShoppingCartService {
         else {
             const product = await this.productsService.getProductById(shoppingCart.productId);
             shoppingCart.subtotal = shoppingCart.pieces * product.price;
-            shoppingCart.discount = 0;
+            shoppingCart.discount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
             shoppingCart.total = shoppingCart.subtotal - shoppingCart.discount;
             shoppingCart.userId = userId;
             const data = await this.shoppingCartRepository.save(shoppingCart);
@@ -75,7 +76,7 @@ let ShoppingCartService = class ShoppingCartService {
         }
         const product = await this.productsService.getProductById(shoppingCart.productId);
         shoppingCart.subtotal = shoppingCart.pieces * product.price;
-        shoppingCart.discount = 0;
+        shoppingCart.discount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
         shoppingCart.total = shoppingCart.subtotal - shoppingCart.discount;
         shoppingCart.userId = userId;
         const data = await this.shoppingCartRepository.update(id, shoppingCart);
@@ -84,6 +85,11 @@ let ShoppingCartService = class ShoppingCartService {
     async confirmOrder(userId, confirmOrder) {
         const user = await this.userService.getById(userId);
         const products = await this.shoppingCartRepository.findItemsByIdUser(userId);
+        let memberships;
+        if (confirmOrder.membershipsId) {
+            memberships = await this.membershipsService.getById(confirmOrder.membershipsId);
+            memberships = memberships.get({ plain: true });
+        }
         const subcription30 = products.filter((i) => Number(i.period) === 30);
         const subcription15 = products.filter((i) => Number(i.period) === 15);
         const process = [];
@@ -135,7 +141,10 @@ let ShoppingCartService = class ShoppingCartService {
         let orderCreated;
         try {
             orderCreated = await this.shoppingService.createOrder(confirmOrder, order, subscriptions);
-            const products = await this.shoppingCartRepository.cleanShoppingCart(userId);
+            await this.shoppingCartRepository.cleanShoppingCart(userId);
+            if (confirmOrder.membershipsId) {
+                orderCreated = await this.shoppingService.createMemberships(userId, memberships);
+            }
         }
         catch (e) {
             console.log(e);
@@ -183,6 +192,27 @@ let ShoppingCartService = class ShoppingCartService {
         const saved = await this.subscriptionsService.saveSubscription(subcription, subcriptionProducts);
         return this.subscriptionsService.findFullSubscriptionById(saved.id);
     }
+    async getProductDiscount(userId, productId, pieces) {
+        let discountProduct = 0;
+        const membership = await this.userService.getCurrentMemberships(userId);
+        const orderProduct = await this.productsService.getProductById(productId);
+        if (membership != null) {
+            const previousOrderProducts = await this.shoppingService.findOrdersProductsByUserId(userId, productId);
+            let countPieces = 0;
+            const discountPos = orderProduct.freeCount;
+            previousOrderProducts.map((p) => {
+                countPieces += p.pieces;
+                if (countPieces >= discountPos) {
+                    countPieces = countPieces - discountPos;
+                }
+            });
+            if (discountPos != null) {
+                const discountCount = Math.trunc((countPieces + pieces) / discountPos);
+                discountProduct = discountCount * orderProduct.price;
+            }
+        }
+        return discountProduct;
+    }
 };
 __decorate([
     (0, common_1.Inject)(shopping_cart_repository_service_1.ShoppingCartRepositoryService),
@@ -212,6 +242,10 @@ __decorate([
     (0, common_1.Inject)(subscriptions_repository_service_1.SubscriptionsRepositoryService),
     __metadata("design:type", subscriptions_repository_service_1.SubscriptionsRepositoryService)
 ], ShoppingCartService.prototype, "subscriptionsService", void 0);
+__decorate([
+    (0, common_1.Inject)(memberships_service_1.MembershipsService),
+    __metadata("design:type", memberships_service_1.MembershipsService)
+], ShoppingCartService.prototype, "membershipsService", void 0);
 ShoppingCartService = __decorate([
     (0, common_1.Injectable)()
 ], ShoppingCartService);

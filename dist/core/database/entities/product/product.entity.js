@@ -97,6 +97,13 @@ __decorate([
 ], ProductEntity.prototype, "content", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
+        field: 'FREE_COUNT',
+        type: sequelize_typescript_1.DataType.INTEGER,
+    }),
+    __metadata("design:type", Number)
+], ProductEntity.prototype, "freeCount", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
         field: 'PRICE',
         type: sequelize_typescript_1.DataType.DOUBLE,
     }),

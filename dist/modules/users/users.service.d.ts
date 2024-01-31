@@ -41,5 +41,7 @@ export declare class UsersService {
     getCurrentMemberships(userId: number): Promise<any>;
     getMemberships(userId: number): Promise<any[]>;
     saveMemberships(userId: number, membershipsId: number): Promise<import("../../core/database/entities/memberships-users/memberships-users-entity").MembershipsUsersEntity>;
+    saveTestMemberships(userId: number, membershipsId: number): Promise<import("../../core/database/entities/memberships-users/memberships-users-entity").MembershipsUsersEntity>;
+    saveGiftMemberships(userId: number): Promise<void>;
     getWinFreeMemberships(userId: number): Promise<number>;
 }

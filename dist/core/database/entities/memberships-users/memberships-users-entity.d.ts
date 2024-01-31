@@ -6,4 +6,5 @@ export declare class MembershipsUsersEntity extends Model {
     createdAt: Date;
     expirationDate: number;
     status: number;
+    free: number;
 }

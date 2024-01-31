@@ -47,6 +47,10 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ field: 'STATUS', type: sequelize_typescript_1.DataType.INTEGER({ length: 1 }) }),
     __metadata("design:type", Number)
 ], MembershipsUsersEntity.prototype, "status", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'FREE', type: sequelize_typescript_1.DataType.INTEGER({ length: 1 }) }),
+    __metadata("design:type", Number)
+], MembershipsUsersEntity.prototype, "free", void 0);
 MembershipsUsersEntity = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'app_t_112_memberships_users',

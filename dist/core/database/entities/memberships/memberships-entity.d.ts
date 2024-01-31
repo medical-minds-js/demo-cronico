@@ -9,4 +9,5 @@ export declare class MembershipsEntity extends Model {
     cost: number;
     totals: number;
     delivered: number;
+    freeDays: number;
 }

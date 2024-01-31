@@ -225,13 +225,27 @@ let UsersRepositoryService = class UsersRepositoryService {
         });
         return items.map((i) => i.get({ plain: true }));
     }
-    async saveMemberships(userId, membershipsId, expirationDate) {
+    async disabledMemberships(userId) {
+        return this.membershipsUsersEntity.update({ status: 0 }, { where: { userId } });
+    }
+    async saveMemberships(userId, membershipsId, expirationDate, isFree) {
         return this.membershipsUsersEntity.create({
             userId,
             membershipsId,
             createdAt: new Date(),
             status: 1,
             expirationDate,
+            free: isFree,
+        });
+    }
+    async saveGiftMemberships(userId, membershipsId, expirationDate) {
+        return this.membershipsUsersEntity.create({
+            userId,
+            membershipsId,
+            createdAt: new Date(),
+            status: 1,
+            expirationDate,
+            free: 0,
         });
     }
     turnOnWinMemberships(id) {

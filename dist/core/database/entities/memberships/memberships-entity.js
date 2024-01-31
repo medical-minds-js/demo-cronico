@@ -43,10 +43,7 @@ __decorate([
     __metadata("design:type", String)
 ], MembershipsEntity.prototype, "benefies", void 0);
 __decorate([
-    (0, sequelize_typescript_1.Column)({
-        field: 'COST',
-        type: sequelize_typescript_1.DataType.INTEGER({ length: 11 }),
-    }),
+    (0, sequelize_typescript_1.Column)({ field: 'COST', type: sequelize_typescript_1.DataType.INTEGER({ length: 11 }) }),
     __metadata("design:type", Number)
 ], MembershipsEntity.prototype, "cost", void 0);
 __decorate([
@@ -57,6 +54,10 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ field: 'DELIVERED', type: sequelize_typescript_1.DataType.INTEGER({ length: 6 }) }),
     __metadata("design:type", Number)
 ], MembershipsEntity.prototype, "delivered", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({ field: 'FREE_DAYS', type: sequelize_typescript_1.DataType.INTEGER({ length: 6 }) }),
+    __metadata("design:type", Number)
+], MembershipsEntity.prototype, "freeDays", void 0);
 MembershipsEntity = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'app_t_011_memberships',

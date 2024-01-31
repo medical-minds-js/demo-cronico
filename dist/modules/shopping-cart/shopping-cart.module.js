@@ -22,6 +22,8 @@ const products_repository_service_1 = require("../products/products-repository.s
 const subscriptions_repository_service_1 = require("../shopping/subscriptions-repository.service");
 const shared_module_1 = require("../../shared/shared/shared.module");
 const send_email_module_1 = require("../../core/services/send-email/send-email.module");
+const memberships_service_1 = require("../memberships/memberships.service");
+const memberships_repository_service_1 = require("../memberships/memberships-repository.service");
 let ShoppingCartModule = class ShoppingCartModule {
 };
 ShoppingCartModule = __decorate([
@@ -33,6 +35,8 @@ ShoppingCartModule = __decorate([
             products_service_1.ProductsService,
             products_repository_service_1.ProductsRepositoryService,
             subscriptions_repository_service_1.SubscriptionsRepositoryService,
+            memberships_service_1.MembershipsService,
+            memberships_repository_service_1.MembershipsRepositoryService,
         ],
         imports: [
             jwt_1.JwtModule.register(constansts_1.jwtOptions),

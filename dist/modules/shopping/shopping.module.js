@@ -20,6 +20,8 @@ const products_module_1 = require("../products/products.module");
 const users_module_1 = require("../users/users.module");
 const shared_module_1 = require("../../shared/shared/shared.module");
 const send_email_module_1 = require("../../core/services/send-email/send-email.module");
+const memberships_service_1 = require("../memberships/memberships.service");
+const memberships_repository_service_1 = require("../memberships/memberships-repository.service");
 let ShoppingModule = class ShoppingModule {
 };
 ShoppingModule = __decorate([
@@ -31,6 +33,8 @@ ShoppingModule = __decorate([
             subscriptions_repository_service_1.SubscriptionsRepositoryService,
             wms_customer_requirement_repository_service_1.WmsCustomerRequirementRepositoryService,
             open_pay_service_1.OpenPayService,
+            memberships_service_1.MembershipsService,
+            memberships_repository_service_1.MembershipsRepositoryService,
         ],
         imports: [
             jwt_1.JwtModule.register(constansts_1.jwtOptions),

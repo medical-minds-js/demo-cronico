@@ -48,7 +48,9 @@ export declare class UsersRepositoryService {
     getFactInfoByUserId(userId: number): Promise<UserFactInfoEntity>;
     getCurrentMemberships(userId: number): Promise<any>;
     getMembershipsByUser(userId: number): Promise<any[]>;
-    saveMemberships(userId: number, membershipsId: number, expirationDate: Date): Promise<MembershipsUsersEntity>;
+    disabledMemberships(userId: number): Promise<[affectedCount: number]>;
+    saveMemberships(userId: number, membershipsId: number, expirationDate: Date, isFree: number): Promise<MembershipsUsersEntity>;
+    saveGiftMemberships(userId: number, membershipsId: number, expirationDate: Date): Promise<MembershipsUsersEntity>;
     turnOnWinMemberships(id: number): Promise<[affectedCount: number]>;
     turnOffWinMemberships(id: number): Promise<[affectedCount: number]>;
 }

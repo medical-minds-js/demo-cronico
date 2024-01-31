@@ -4,5 +4,6 @@ export declare class MembershipsService {
     getSelectedMemberships(): Promise<MembershipsEntity[]>;
     getMembershipsByIds(ids: number[]): Promise<MembershipsEntity[]>;
     getById(id: number): Promise<MembershipsEntity>;
+    getGiftMemberships(): Promise<MembershipsEntity>;
     increseDelievered(id: number): Promise<void>;
 }

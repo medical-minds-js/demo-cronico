@@ -17,6 +17,7 @@ export declare class ProductEntity extends Model {
     laboratoryName: string;
     activeIngredient: string;
     content: string;
+    freeCount: number;
     price: number;
     productType: number;
     createdAt: Date;

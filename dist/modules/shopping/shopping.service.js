@@ -153,11 +153,37 @@ let ShoppingService = class ShoppingService {
             return rest;
         });
     }
+    async findOrdersProductsByUserId(userId, productId) {
+        const data = await this.orderRepository.findOrdersByUserId(userId);
+        data.map((item) => {
+            const rest = __rest(item.get({ plain: true }), []);
+            return rest;
+        });
+        const orders = data;
+        const previousProducts = [];
+        data.map((o) => {
+            o.orderProducts.filter((p) => {
+                if (p.productId == productId) {
+                    previousProducts.push(p);
+                }
+            });
+        });
+        return previousProducts;
+    }
     async getOrderCard(userId, orderId) {
         const user = await this.userService.getById(userId);
         const order = await this.orderRepository.getOrderCardById(orderId);
         const card = await this.openPayService.getCardById(user.openPayId, order.card.cardOpenPayId);
         return card;
+    }
+    async createMemberships(userId, memberships) {
+        const saved = await this.userService.saveMemberships(userId, memberships.id);
+        let paymentProcessed;
+        try {
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 };
 __decorate([

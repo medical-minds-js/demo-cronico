@@ -50,11 +50,11 @@ let UsersService = class UsersService {
     }
     async saveRegister(user) {
         const data = await this.userRepository.save(user);
-        const memberships = await this.membershipsService.getById(2);
-        if (memberships.totals > memberships.delivered) {
-            await this.saveMemberships(data.id, 2);
-            await this.membershipsService.increseDelievered(2);
-            await this.userRepository.turnOnWinMemberships(data.id);
+        const memberships = await this.membershipsService.getGiftMemberships();
+        if (memberships) {
+            if (memberships.totals > memberships.delivered) {
+                await this.saveGiftMemberships(data.id);
+            }
         }
         return (0, user_utils_1.UserMapper)(data.get({ plain: true }));
     }
@@ -198,12 +198,30 @@ let UsersService = class UsersService {
         const memberships = await this.membershipsService.getById(membershipsId);
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + memberships.days);
-        return this.userRepository.saveMemberships(userId, membershipsId, expirationDate);
+        await this.userRepository.disabledMemberships(userId);
+        return this.userRepository.saveMemberships(userId, membershipsId, expirationDate, 0);
+    }
+    async saveTestMemberships(userId, membershipsId) {
+        const memberships = await this.membershipsService.getById(membershipsId);
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + memberships.freeDays);
+        await this.userRepository.disabledMemberships(userId);
+        return this.userRepository.saveMemberships(userId, membershipsId, expirationDate, 1);
+    }
+    async saveGiftMemberships(userId) {
+        const memberships = await this.membershipsService.getGiftMemberships();
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + memberships.freeDays);
+        await this.userRepository.disabledMemberships(userId);
+        await this.userRepository.saveGiftMemberships(userId, memberships.id, expirationDate);
+        await this.membershipsService.increseDelievered(memberships.id);
+        await this.userRepository.turnOnWinMemberships(userId);
     }
     async getWinFreeMemberships(userId) {
         let winMemberships = 0;
         const memberships = await this.userRepository.getCurrentMemberships(userId);
-        if (memberships && memberships.membershipsId === 2) {
+        const giftMemberships = await this.membershipsService.getGiftMemberships();
+        if (memberships && memberships.membershipsId === giftMemberships.id) {
             const user = await this.userRepository.findOneById(userId);
             if (user.winMemberships) {
                 winMemberships = 1;

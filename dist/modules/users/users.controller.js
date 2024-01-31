@@ -95,7 +95,7 @@ let UsersController = class UsersController {
         return new success_list_response_1.SuccessListResponse(result);
     }
     async startTestMemberships(req, data) {
-        const result = await this.usersService.saveMemberships(req.user.sub, data.id);
+        const result = await this.usersService.saveTestMemberships(req.user.sub, data.id);
         return new success_response_1.SuccessResponse(result);
     }
     async saveMemberships(req, data) {

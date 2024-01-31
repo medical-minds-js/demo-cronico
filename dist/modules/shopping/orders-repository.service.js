@@ -18,6 +18,7 @@ const sequelize_1 = require("sequelize");
 const constants_1 = require("../../core/constants");
 const cards_entity_1 = require("../../core/database/entities/cards/cards.entity");
 const order_product_status_entity_1 = require("../../core/database/entities/order-product-status/order-product-status.entity");
+const order_product_entity_1 = require("../../core/database/entities/order-products/order-product.entity");
 const order_status_entity_1 = require("../../core/database/entities/order-status/order-status.entity");
 const subscription_entity_1 = require("../../core/database/entities/subscription/subscription.entity");
 let OrdersRepositoryService = class OrdersRepositoryService {
@@ -34,6 +35,7 @@ let OrdersRepositoryService = class OrdersRepositoryService {
     async findOrdersByUserId(userId) {
         return await this.orderRepository.findAll({
             where: { userId: [userId] },
+            include: [order_product_entity_1.OrderProductEntity],
         });
     }
     async changeNoPaymentStatus(id) {

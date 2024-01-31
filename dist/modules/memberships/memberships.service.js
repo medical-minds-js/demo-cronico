@@ -24,6 +24,9 @@ let MembershipsService = class MembershipsService {
     async getById(id) {
         return this.membershipsRepositoryService.getById(id);
     }
+    async getGiftMemberships() {
+        return this.membershipsRepositoryService.getById(1);
+    }
     async increseDelievered(id) {
         const newObject = await this.membershipsRepositoryService.getById(id);
         await newObject.increment('delivered', { by: 1 });
