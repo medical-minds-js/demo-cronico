@@ -50,12 +50,6 @@ let UsersService = class UsersService {
     }
     async saveRegister(user) {
         const data = await this.userRepository.save(user);
-        const memberships = await this.membershipsService.getGiftMemberships();
-        if (memberships) {
-            if (memberships.totals > memberships.delivered) {
-                await this.saveGiftMemberships(data.id);
-            }
-        }
         return (0, user_utils_1.UserMapper)(data.get({ plain: true }));
     }
     async updateRegister(user) {
@@ -215,7 +209,6 @@ let UsersService = class UsersService {
         await this.userRepository.disabledMemberships(userId);
         await this.userRepository.saveGiftMemberships(userId, memberships.id, expirationDate);
         await this.membershipsService.increseDelievered(memberships.id);
-        await this.userRepository.turnOnWinMemberships(userId);
     }
     async getWinFreeMemberships(userId) {
         let winMemberships = 0;
@@ -229,6 +222,16 @@ let UsersService = class UsersService {
             }
         }
         return winMemberships;
+    }
+    async searchWinFreeMemberships(userId) {
+        const memberships = await this.membershipsService.getGiftMemberships();
+        if (memberships) {
+            if (memberships.totals > memberships.delivered) {
+                await this.saveGiftMemberships(userId);
+                return 1;
+            }
+        }
+        return 0;
     }
 };
 __decorate([

@@ -44,4 +44,5 @@ export declare class UsersService {
     saveTestMemberships(userId: number, membershipsId: number): Promise<import("../../core/database/entities/memberships-users/memberships-users-entity").MembershipsUsersEntity>;
     saveGiftMemberships(userId: number): Promise<void>;
     getWinFreeMemberships(userId: number): Promise<number>;
+    searchWinFreeMemberships(userId: number): Promise<number>;
 }

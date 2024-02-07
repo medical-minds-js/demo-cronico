@@ -27,5 +27,6 @@ export declare class UsersController {
     getMemberships(req: any): Promise<SuccessListResponse>;
     startTestMemberships(req: any, data: any): Promise<SuccessResponse>;
     saveMemberships(req: any, data: any): Promise<SuccessResponse>;
+    searchWinFreeMemberships(req: any): Promise<SuccessListResponse>;
     getWinFreeMemberships(req: any): Promise<SuccessListResponse>;
 }

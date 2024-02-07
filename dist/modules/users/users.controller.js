@@ -102,6 +102,10 @@ let UsersController = class UsersController {
         const result = await this.usersService.saveMemberships(req.user.sub, data.id);
         return new success_response_1.SuccessResponse(result);
     }
+    async searchWinFreeMemberships(req) {
+        const result = await this.usersService.searchWinFreeMemberships(req.user.sub);
+        return new success_response_1.SuccessResponse(result);
+    }
     async getWinFreeMemberships(req) {
         const result = await this.usersService.getWinFreeMemberships(req.user.sub);
         return new success_response_1.SuccessResponse(result);
@@ -272,6 +276,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "saveMemberships", null);
+__decorate([
+    (0, common_1.Get)('/memberships/search-win'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "searchWinFreeMemberships", null);
 __decorate([
     (0, common_1.Get)('/memberships/win-free'),
     __param(0, (0, common_1.Request)()),
