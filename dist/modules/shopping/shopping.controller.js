@@ -39,6 +39,10 @@ let ShoppingController = class ShoppingController {
         const data = await this.shoppingService.findOrdersByUserId(req.user.sub);
         return new success_list_response_1.SuccessListResponse(data);
     }
+    async saveMemberships(req, data) {
+        const result = await this.shoppingService.createOrderMemberships(req.user.sub, data.id);
+        return new success_response_1.SuccessResponse(result);
+    }
 };
 __decorate([
     (0, common_1.Inject)(shopping_service_1.ShoppingService),
@@ -82,6 +86,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ShoppingController.prototype, "getOrdersByUserId", null);
+__decorate([
+    (0, common_1.Post)('/memberships'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], ShoppingController.prototype, "saveMemberships", null);
 ShoppingController = __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('api/v1/shopping')

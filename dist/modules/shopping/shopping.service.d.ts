@@ -14,7 +14,10 @@ export declare class ShoppingService {
     private readonly productsService;
     private readonly userService;
     private readonly sendEmailService;
-    createOrder(confirmOrder: ConfirmOrder, order: OrderEntity, subscriptions: SubscriptionEntity[]): Promise<any>;
+    private readonly addressService;
+    private readonly cardsService;
+    private readonly membershipsService;
+    createOrder(confirmOrder: ConfirmOrder, order: OrderEntity, subscriptions: SubscriptionEntity[], memberships: MembershipsEntity): Promise<any>;
     private sendRequiementWms;
     private generateSyncData;
     getShopingById(id: number): Promise<SubscriptionEntity>;
@@ -23,5 +26,6 @@ export declare class ShoppingService {
     findOrdersByUserId(userId: number): Promise<OrderEntity[]>;
     findOrdersProductsByUserId(userId: number, productId: number): Promise<OrderProductEntity[]>;
     getOrderCard(userId: any, orderId: any): Promise<OpenPayCard>;
-    createMemberships(userId: any, memberships: MembershipsEntity): Promise<any>;
+    createOrderMemberships(userId: number, membershipsId: number): Promise<any>;
+    private buildOrderMembership;
 }

@@ -30,6 +30,7 @@ const wms_customer_requirement_entity_providers_1 = require("../../core/database
 const password_strategy_service_1 = require("../../core/services/password-strategy/password-strategy.service");
 const memberships_users_entity_provider_1 = require("../../core/database/entities/memberships-users/memberships-users-entity.provider");
 const memberships_entity_providers_1 = require("../../core/database/entities/memberships/memberships-entity.providers");
+const order_memberships_entity_providers_1 = require("../../core/database/entities/order-memberships/order-memberships-entity.providers");
 let SharedModule = class SharedModule {
 };
 SharedModule = __decorate([
@@ -38,6 +39,7 @@ SharedModule = __decorate([
             password_strategy_service_1.PasswordStrategyService,
             ...order_entity_providers_1.ordersProviders,
             ...order_product_entity_providers_1.orderProductProviders,
+            ...order_memberships_entity_providers_1.orderMembershipsProviders,
             ...subscription_entity_providers_1.subscriptionEntityProviders,
             ...subscription_product_entity_providers_1.subscriptionProductEntityProviders,
             ...wms_customer_requirement_entity_providers_1.wmsCustomerRequirementEntityProviders,
@@ -66,6 +68,7 @@ SharedModule = __decorate([
             password_strategy_service_1.PasswordStrategyService,
             ...order_entity_providers_1.ordersProviders,
             ...order_product_entity_providers_1.orderProductProviders,
+            ...order_memberships_entity_providers_1.orderMembershipsProviders,
             ...subscription_entity_providers_1.subscriptionEntityProviders,
             ...subscription_product_entity_providers_1.subscriptionProductEntityProviders,
             ...wms_customer_requirement_entity_providers_1.wmsCustomerRequirementEntityProviders,

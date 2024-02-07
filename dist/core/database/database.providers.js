@@ -43,6 +43,8 @@ const user_fact_info_entity_1 = require("./entities/user-fact-info/user-fact-inf
 const comments_service_entity_1 = require("./entities/comments-service/comments-service.entity");
 const memberships_entity_1 = require("./entities/memberships/memberships-entity");
 const memberships_users_entity_1 = require("./entities/memberships-users/memberships-users-entity");
+const order_memberships_status_entity_1 = require("./entities/order-memberships-status/order-memberships-status.entity");
+const order_memberships_entity_1 = require("./entities/order-memberships/order-memberships.entity");
 exports.databaseProviders = [
     {
         provide: 'SEQUELIZE',
@@ -93,6 +95,8 @@ exports.databaseProviders = [
                 wms_customer_requirement_entity_1.WmsCustomerRequirementEntity,
                 wms_customer_requirement_detail_entity_1.WmsCustomerRequirementDetailEntity,
                 comments_service_entity_1.CommentsServiceEntity,
+                order_memberships_status_entity_1.OrderMembershipsStatusEntity,
+                order_memberships_entity_1.OrderMembershipsEntity,
             ]);
             await sequelize.sync();
             return sequelize;

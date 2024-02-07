@@ -140,11 +140,8 @@ let ShoppingCartService = class ShoppingCartService {
         order.deliveryDate.setDate(order.deliveryDate.getDate() + 2);
         let orderCreated;
         try {
-            orderCreated = await this.shoppingService.createOrder(confirmOrder, order, subscriptions);
+            orderCreated = await this.shoppingService.createOrder(confirmOrder, order, subscriptions, memberships);
             await this.shoppingCartRepository.cleanShoppingCart(userId);
-            if (confirmOrder.membershipsId) {
-                orderCreated = await this.shoppingService.createMemberships(userId, memberships);
-            }
         }
         catch (e) {
             console.log(e);

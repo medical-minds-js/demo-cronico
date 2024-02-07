@@ -30,9 +30,17 @@ const wms_customer_requirement_repository_service_1 = require("./wms-customer-re
 const users_service_1 = require("../users/users.service");
 const fail_response_1 = require("../../core/clases/fail.response");
 const send_email_service_1 = require("../../core/services/send-email/send-email.service");
+const cards_service_1 = require("../cards/cards.service");
+const address_service_1 = require("../address/address.service");
+const memberships_service_1 = require("../memberships/memberships.service");
 let ShoppingService = class ShoppingService {
-    async createOrder(confirmOrder, order, subscriptions) {
+    async createOrder(confirmOrder, order, subscriptions, memberships) {
         const saved = await this.orderRepository.saveFullOrder(order);
+        if (memberships) {
+            const newOrderMemberships = this.buildOrderMembership(memberships, saved.id);
+            await this.orderRepository.saveOrderMemberships(newOrderMemberships);
+            await this.userService.saveMemberships(order.userId, memberships.id);
+        }
         await this.subscriptionsService.updateOrderId(saved.id, subscriptions.map((item) => item.id));
         const newOrder = Object.assign(Object.assign({}, order), { id: saved.id });
         const user = await this.userService.getById(order.userId);
@@ -176,14 +184,59 @@ let ShoppingService = class ShoppingService {
         const card = await this.openPayService.getCardById(user.openPayId, order.card.cardOpenPayId);
         return card;
     }
-    async createMemberships(userId, memberships) {
-        const saved = await this.userService.saveMemberships(userId, memberships.id);
-        let paymentProcessed;
+    async createOrderMemberships(userId, membershipsId) {
+        const memberships = await this.membershipsService.getById(membershipsId);
+        const user = await this.userService.getById(userId);
+        const newOrderMemberships = this.buildOrderMembership(memberships, 1);
+        const address = await this.addressService.findActiveByUserId(userId);
+        const card = await this.cardsService.getActiveByUser(userId);
+        const order = {
+            orderStatusId: 1,
+            userId,
+            cardId: card.id,
+            name: memberships.name,
+            total: memberships.cost,
+            street: address.street,
+            streetNumber: address.streetNumber,
+            suburb: address.suburb,
+            cp: address.cp,
+            location: address.location,
+            state: address.state,
+            comments: address.comments,
+            reference: address.reference,
+            deliveryDate: new Date(),
+            rangeTimes: newOrderMemberships.name,
+            visits: 0,
+            user: user.get({ plain: true }),
+            card: card.get({ plain: true }),
+            orderProducts: [],
+        };
+        const saved = await this.orderRepository.saveOrder(order);
+        newOrderMemberships.orderId = saved.id;
+        await this.orderRepository.saveOrderMemberships(newOrderMemberships);
+        await this.userService.saveMemberships(order.userId, memberships.id);
         try {
         }
         catch (e) {
             console.log(e);
         }
+    }
+    buildOrderMembership(memberships, orderId) {
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + memberships.days);
+        return {
+            orderId,
+            membershipsId: memberships.id,
+            statusId: 1,
+            name: memberships.name,
+            expirationDate: expirationDate,
+            pieces: 1,
+            price: memberships.cost,
+            discount: 0,
+            subtotal: memberships.cost,
+            total: memberships.cost,
+            createdAt: new Date(),
+        };
     }
 };
 __decorate([
@@ -214,6 +267,18 @@ __decorate([
     (0, common_1.Inject)(send_email_service_1.SendEmailService),
     __metadata("design:type", send_email_service_1.SendEmailService)
 ], ShoppingService.prototype, "sendEmailService", void 0);
+__decorate([
+    (0, common_1.Inject)(address_service_1.AddressService),
+    __metadata("design:type", address_service_1.AddressService)
+], ShoppingService.prototype, "addressService", void 0);
+__decorate([
+    (0, common_1.Inject)(cards_service_1.CardsService),
+    __metadata("design:type", cards_service_1.CardsService)
+], ShoppingService.prototype, "cardsService", void 0);
+__decorate([
+    (0, common_1.Inject)(memberships_service_1.MembershipsService),
+    __metadata("design:type", memberships_service_1.MembershipsService)
+], ShoppingService.prototype, "membershipsService", void 0);
 ShoppingService = __decorate([
     (0, common_1.Injectable)()
 ], ShoppingService);

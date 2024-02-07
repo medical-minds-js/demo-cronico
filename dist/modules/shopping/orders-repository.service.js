@@ -22,15 +22,19 @@ const order_product_entity_1 = require("../../core/database/entities/order-produ
 const order_status_entity_1 = require("../../core/database/entities/order-status/order-status.entity");
 const subscription_entity_1 = require("../../core/database/entities/subscription/subscription.entity");
 let OrdersRepositoryService = class OrdersRepositoryService {
-    constructor(orderRepository, orderProductsRepository, orderSubscriptionsRepository) {
+    constructor(orderRepository, orderProductsRepository, orderSubscriptionsRepository, orderMembershipsRepository) {
         this.orderRepository = orderRepository;
         this.orderProductsRepository = orderProductsRepository;
         this.orderSubscriptionsRepository = orderSubscriptionsRepository;
+        this.orderMembershipsRepository = orderMembershipsRepository;
     }
     async saveFullOrder(order) {
         const data = await this.orderRepository.create(Object.assign({}, order));
         await this.saveOrderProducts(data.id, order.orderProducts);
         return data;
+    }
+    async saveOrder(order) {
+        return this.orderRepository.create(Object.assign({}, order));
     }
     async findOrdersByUserId(userId) {
         return await this.orderRepository.findAll({
@@ -69,6 +73,9 @@ let OrdersRepositoryService = class OrdersRepositoryService {
     async saveOrderProducts(orderId, items) {
         return this.orderProductsRepository.bulkCreate(items.map((item) => (Object.assign(Object.assign({}, item), { orderId, status: 1, visits: 0, createdAt: new Date() }))));
     }
+    async saveOrderMemberships(data) {
+        return this.orderMembershipsRepository.create(Object.assign({}, data));
+    }
     async getProductsByOrders(ids) {
         return this.orderProductsRepository.findAll({
             where: { orderId: ids },
@@ -81,7 +88,8 @@ OrdersRepositoryService = __decorate([
     __param(0, (0, common_1.Inject)(constants_1.ORDER_REPOSITORY)),
     __param(1, (0, common_1.Inject)(constants_1.ORDER_PRODUCT_REPOSITORY)),
     __param(2, (0, common_1.Inject)(constants_1.ORDER_SUBSCRIPTION_REPOSITORY)),
-    __metadata("design:paramtypes", [Object, Object, Object])
+    __param(3, (0, common_1.Inject)(constants_1.ORDER_MEMBERSHIPS_REPOSITORY)),
+    __metadata("design:paramtypes", [Object, Object, Object, Object])
 ], OrdersRepositoryService);
 exports.OrdersRepositoryService = OrdersRepositoryService;
 //# sourceMappingURL=orders-repository.service.js.map

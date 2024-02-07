@@ -22,6 +22,8 @@ const shared_module_1 = require("../../shared/shared/shared.module");
 const send_email_module_1 = require("../../core/services/send-email/send-email.module");
 const memberships_service_1 = require("../memberships/memberships.service");
 const memberships_repository_service_1 = require("../memberships/memberships-repository.service");
+const address_module_1 = require("../address/address.module");
+const cards_module_1 = require("../cards/cards.module");
 let ShoppingModule = class ShoppingModule {
 };
 ShoppingModule = __decorate([
@@ -42,6 +44,8 @@ ShoppingModule = __decorate([
             products_module_1.ProductsModule,
             users_module_1.UsersModule,
             send_email_module_1.SendEmailModule,
+            address_module_1.AddressModule,
+            cards_module_1.CardsModule,
         ],
         exports: [shopping_service_1.ShoppingService],
     })

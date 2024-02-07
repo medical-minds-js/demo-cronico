@@ -8,4 +8,5 @@ export declare class ShoppingController {
     getInfoShoppping(req: any, params: any): Promise<SuccessResponse>;
     getSubscriptionsByUserId(req: any): Promise<SuccessListResponse>;
     getOrdersByUserId(req: any): Promise<SuccessListResponse>;
+    saveMemberships(req: any, data: any): Promise<SuccessResponse>;
 }
