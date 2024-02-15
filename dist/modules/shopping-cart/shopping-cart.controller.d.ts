@@ -9,4 +9,5 @@ export declare class ShoppingCartControllerController {
     updateShoppingCart(request: ShoppingCartEntity, req: any): Promise<SuccessResponse>;
     deleteShoppingCart(params: any): Promise<SuccessResponse>;
     confirmOrder(req: any, confirmOrder: ConfirmOrder): Promise<SuccessResponse>;
+    getDiscountByProductId(req: any, body: any): Promise<SuccessResponse>;
 }

@@ -57,6 +57,10 @@ let ShoppingCartControllerController = class ShoppingCartControllerController {
         const data = await this.shoppingCartService.confirmOrder(req.user.sub, confirmOrder);
         return new success_response_1.SuccessResponse('Orden confirmada');
     }
+    async getDiscountByProductId(req, body) {
+        const data = await this.shoppingCartService.getDiscountProduct(body.userId, body.productId, body.pieces);
+        return new success_response_1.SuccessResponse(data);
+    }
 };
 __decorate([
     (0, common_1.Inject)(shopping_cart_service_1.ShoppingCartService),
@@ -105,6 +109,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ShoppingCartControllerController.prototype, "confirmOrder", null);
+__decorate([
+    (0, common_1.Post)('discount'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], ShoppingCartControllerController.prototype, "getDiscountByProductId", null);
 ShoppingCartControllerController = __decorate([
     (0, common_1.Controller)('api/v1/shopping-cart')
 ], ShoppingCartControllerController);

@@ -12,4 +12,5 @@ export declare class ShoppingCartEntity extends Model {
     total: number;
     createdAt: Date;
     product: ProductEntity;
+    previousPieces: number;
 }

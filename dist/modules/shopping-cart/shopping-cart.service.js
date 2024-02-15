@@ -8,17 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShoppingCartService = void 0;
 const common_1 = require("@nestjs/common");
@@ -32,11 +21,20 @@ const subscriptions_repository_service_1 = require("../shopping/subscriptions-re
 const memberships_service_1 = require("../memberships/memberships.service");
 let ShoppingCartService = class ShoppingCartService {
     async findByUserId(userId) {
+        let shoppingCar = [];
         const data = await this.shoppingCartRepository.findItemsByIdUser(userId);
-        return data.map((item) => {
-            const rest = __rest(item.get({ plain: true }), []);
+        shoppingCar = data.map((item) => {
+            const rest = item.get({ plain: true });
             return rest;
         });
+        shoppingCar.map((cartItem) => {
+            this.getProductDiscount(userId, cartItem.productId, cartItem.pieces).then((discount) => {
+                cartItem.discount = discount.discountProduct;
+                cartItem.previousPieces = discount.countPieces;
+                return cartItem;
+            });
+        });
+        return shoppingCar;
     }
     async save(userId, shoppingCart) {
         const previousProduct = await this.shoppingCartRepository.findPreviousProductByUser(userId, shoppingCart.productId);
@@ -46,7 +44,8 @@ let ShoppingCartService = class ShoppingCartService {
             previousProductData.pieces += shoppingCart.pieces;
             previousProductData.subtotal =
                 shoppingCart.pieces * previousProduct.product.price;
-            previousProductData.discount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
+            const productDiscount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
+            previousProduct.discount = productDiscount.discountProduct;
             previousProductData.total +=
                 previousProductData.subtotal - previousProductData.discount;
             await this.shoppingCartRepository.update(previousProduct.id, previousProductData);
@@ -55,7 +54,8 @@ let ShoppingCartService = class ShoppingCartService {
         else {
             const product = await this.productsService.getProductById(shoppingCart.productId);
             shoppingCart.subtotal = shoppingCart.pieces * product.price;
-            shoppingCart.discount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
+            const productDiscount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
+            shoppingCart.discount = productDiscount.discountProduct;
             shoppingCart.total = shoppingCart.subtotal - shoppingCart.discount;
             shoppingCart.userId = userId;
             const data = await this.shoppingCartRepository.save(shoppingCart);
@@ -76,7 +76,8 @@ let ShoppingCartService = class ShoppingCartService {
         }
         const product = await this.productsService.getProductById(shoppingCart.productId);
         shoppingCart.subtotal = shoppingCart.pieces * product.price;
-        shoppingCart.discount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
+        const productDiscount = await this.getProductDiscount(userId, shoppingCart.productId, shoppingCart.pieces);
+        shoppingCart.discount = productDiscount.discountProduct;
         shoppingCart.total = shoppingCart.subtotal - shoppingCart.discount;
         shoppingCart.userId = userId;
         const data = await this.shoppingCartRepository.update(id, shoppingCart);
@@ -191,24 +192,29 @@ let ShoppingCartService = class ShoppingCartService {
     }
     async getProductDiscount(userId, productId, pieces) {
         let discountProduct = 0;
+        let countPieces = 0;
+        let discountCount = 0;
         const membership = await this.userService.getCurrentMemberships(userId);
         const orderProduct = await this.productsService.getProductById(productId);
         if (membership != null) {
             const previousOrderProducts = await this.shoppingService.findOrdersProductsByUserId(userId, productId);
-            let countPieces = 0;
             const discountPos = orderProduct.freeCount;
             previousOrderProducts.map((p) => {
                 countPieces += p.pieces;
-                if (countPieces >= discountPos) {
+                if (countPieces + 1 >= discountPos) {
                     countPieces = countPieces - discountPos;
                 }
             });
             if (discountPos != null) {
-                const discountCount = Math.trunc((countPieces + pieces) / discountPos);
+                discountCount = Math.trunc((countPieces + pieces) / discountPos);
                 discountProduct = discountCount * orderProduct.price;
             }
         }
-        return discountProduct;
+        const data = { discountProduct, countPieces: countPieces };
+        return data;
+    }
+    async getDiscountProduct(userId, productId, pieces) {
+        return this.getProductDiscount(userId, productId, pieces);
     }
 };
 __decorate([

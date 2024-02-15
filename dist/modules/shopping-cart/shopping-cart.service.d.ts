@@ -10,11 +10,18 @@ export declare class ShoppingCartService {
     private readonly productsService;
     private readonly subscriptionsService;
     private readonly membershipsService;
-    findByUserId(userId: number): Promise<ShoppingCartEntity[]>;
+    findByUserId(userId: number): Promise<any[]>;
     save(userId: number, shoppingCart: ShoppingCartEntity): Promise<ShoppingCartEntity>;
     delete(id: number): Promise<number>;
     updateCart(userId: number, id: number, shoppingCart: ShoppingCartEntity): Promise<number[]>;
     confirmOrder(userId: number, confirmOrder: ConfirmOrder): Promise<string>;
     saveSubscription(userId: number, products: ShoppingCartEntity[]): Promise<SubscriptionEntity>;
-    private getProductDiscount;
+    getProductDiscount(userId: number, productId: number, pieces: number): Promise<{
+        discountProduct: number;
+        countPieces: number;
+    }>;
+    getDiscountProduct(userId: number, productId: number, pieces: number): Promise<{
+        discountProduct: number;
+        countPieces: number;
+    }>;
 }
