@@ -201,13 +201,14 @@ let ShoppingCartService = class ShoppingCartService {
             const discountPos = orderProduct.freeCount;
             previousOrderProducts.map((p) => {
                 countPieces += p.pieces;
-                if (countPieces + 1 >= discountPos) {
-                    countPieces = countPieces - discountPos;
-                }
             });
+            while (countPieces + 1 >= discountPos) {
+                countPieces = countPieces - discountPos;
+            }
             if (discountPos != null) {
-                discountCount = Math.trunc((countPieces + pieces) / discountPos);
+                discountCount = Math.trunc((countPieces + pieces) / (discountPos + 1));
                 discountProduct = discountCount * orderProduct.price;
+                discountProduct = +discountProduct.toFixed(2);
             }
         }
         const data = { discountProduct, countPieces: countPieces };
