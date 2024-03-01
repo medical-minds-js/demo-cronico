@@ -15,16 +15,7 @@ const memberships_repository_service_1 = require("./memberships-repository.servi
 let MembershipsService = class MembershipsService {
     async getSelectedMemberships() {
         const data = await this.membershipsRepositoryService.getSelectedMemberships();
-        const items = data.map((item) => item.get({ plain: true }));
-        return items.map((item) => {
-            const listBenefies = item.benefies
-                .replace(new RegExp('<li>', 'g'), '')
-                .replace(new RegExp('\n', 'g'), '')
-                .split('</li>')
-                .filter((i) => i)
-                .map((i) => i.trim());
-            return Object.assign(Object.assign({}, item), { listBenefies });
-        });
+        return data.map((item) => item.get({ plain: true }));
     }
     async getMembershipsByIds(ids) {
         const data = await this.membershipsRepositoryService.getByIds(ids);

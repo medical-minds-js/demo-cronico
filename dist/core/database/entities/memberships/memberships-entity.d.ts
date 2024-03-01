@@ -10,4 +10,5 @@ export declare class MembershipsEntity extends Model {
     totals: number;
     delivered: number;
     freeDays: number;
+    listBenefies: string[];
 }

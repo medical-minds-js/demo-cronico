@@ -58,6 +58,24 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ field: 'FREE_DAYS', type: sequelize_typescript_1.DataType.INTEGER({ length: 6 }) }),
     __metadata("design:type", Number)
 ], MembershipsEntity.prototype, "freeDays", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.VIRTUAL,
+        get: function () {
+            const data = this.getDataValue('benefies');
+            if (data) {
+                return data
+                    .replace(new RegExp('<li>', 'g'), '')
+                    .replace(new RegExp('\n', 'g'), '')
+                    .split('</li>')
+                    .filter((i) => i)
+                    .map((i) => i.trim());
+            }
+            return [];
+        },
+    }),
+    __metadata("design:type", Array)
+], MembershipsEntity.prototype, "listBenefies", void 0);
 MembershipsEntity = __decorate([
     (0, sequelize_typescript_1.Table)({
         tableName: 'app_t_011_memberships',
