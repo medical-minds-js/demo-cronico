@@ -202,10 +202,10 @@ let ShoppingCartService = class ShoppingCartService {
             previousOrderProducts.map((p) => {
                 countPieces += p.pieces;
             });
-            while (countPieces + 1 >= discountPos) {
-                countPieces = countPieces - discountPos;
-            }
             if (discountPos != null) {
+                while (countPieces + 1 >= discountPos) {
+                    countPieces = countPieces - discountPos;
+                }
                 discountCount = Math.trunc((countPieces + pieces) / (discountPos + 1));
                 discountProduct = discountCount * orderProduct.price;
                 discountProduct = +discountProduct.toFixed(2);
